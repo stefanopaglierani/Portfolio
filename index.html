@@ -1,161 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DaVinci Glamping | Nature, Tech & Freedom</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Meta OG per social e conversione -->
-  <meta property="og:title" content="DaVinci Glamping | Nature, Technology & Future">
-  <meta property="og:description" content="Experience the future of travel. Luxury geodesic domes, smart tech, stargazing & total freedom. Join our early supporters!">
-  <meta property="og:image" content="hero-render.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://davinci-glamping.github.io/DaVinciGlamping/">
+<title>Da Vinci Glamping | Future of Off-Grid Tourism</title>
 
-  <style>
-    /* --------------------- GLOBAL --------------------- */
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif; scroll-behavior:smooth; }
-    body { color:#111; background:#fff; line-height:1.6; overflow-x:hidden; }
-    a { text-decoration:none; color:inherit; }
+<style>
 
-    /* --------------------- HEADER --------------------- */
-    header { width:100%; position:fixed; top:0; left:0; background: rgba(255,255,255,0.95); z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    .container { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; height:70px; }
-    .logo { font-weight:bold; font-size:1.5rem; color:#222; cursor:pointer; }
-    nav ul { list-style:none; display:flex; gap:20px; }
-    nav ul li a { font-weight:600; padding:5px 10px; transition:0.3s; }
-    nav ul li a:hover { color:#1e90ff; }
-    .menu-toggle { display:none; font-size:2rem; background:none; border:none; cursor:pointer; }
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f5f5;
+color:#333;
+}
 
-    /* --------------------- HERO --------------------- */
-    .hero-section { display:flex; justify-content:center; align-items:center; text-align:center; height:100vh; background:url('hero-render.jpg') no-repeat center center/cover; color:#fff; position:relative; }
-    .hero-section::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.45); }
-    .hero-content { position:relative; z-index:1; max-width:800px; padding:20px; animation:fadeIn 1.5s ease forwards; }
-    .hero-content h1 { font-size:3rem; margin-bottom:20px; text-shadow:1px 1px 5px rgba(0,0,0,0.5); }
-    .hero-content p { font-size:1.25rem; margin-bottom:30px; }
-    .btn { background:#1e90ff; color:#fff; padding:15px 30px; border-radius:50px; font-weight:bold; transition:0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-    .btn:hover { background:#0c5db3; transform:scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.3); }
+/* NAVBAR */
 
-    @keyframes fadeIn { 0% {opacity:0; transform: translateY(20px);} 100% {opacity:1; transform: translateY(0);} }
+header{
+background:white;
+padding:20px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
 
-    /* --------------------- FEATURES --------------------- */
-    .overlay-hero { background:#f8f8f8; padding:100px 20px; display:flex; flex-wrap:wrap; justify-content:center; gap:30px; text-align:center; }
-    .feature-block { flex:1 1 300px; max-width:350px; background:#fff; border-radius:20px; padding:50px 25px; box-shadow:0 10px 30px rgba(0,0,0,0.1); transition: transform 0.4s, box-shadow 0.4s; cursor:pointer; }
-    .feature-block:hover { transform: translateY(-15px) scale(1.02); box-shadow:0 15px 40px rgba(0,0,0,0.2); }
-    .feature-block h2 { margin-bottom:15px; font-size:1.5rem; color:#1e90ff; }
-    .feature-block p { font-size:1rem; color:#333; }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
 
-    /* --------------------- EARLY SUPPORT --------------------- */
-    .early-support { background:#1e90ff; color:#fff; padding:100px 20px; text-align:center; position:relative; }
-    .early-support h2 { font-size:2.25rem; margin-bottom:20px; animation:fadeIn 1.2s ease forwards; }
-    .early-support p { font-size:1.2rem; margin-bottom:30px; }
-    .early-support form { display:flex; flex-direction: column; align-items:center; gap:15px; max-width:400px; margin:0 auto; animation:fadeIn 1.5s ease forwards; }
-    .early-support input { padding:18px 25px; border-radius:50px; border:none; width:100%; font-size:1rem; }
-    .early-support button { width:100%; font-size:1rem; cursor:pointer; border:none; background:#fff; color:#1e90ff; padding:18px; border-radius:50px; font-weight:bold; transition:0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-    .early-support button:hover { background:#e0e0e0; transform:scale(1.03); box-shadow:0 10px 25px rgba(0,0,0,0.3); }
+.logo{
+font-size:22px;
+font-weight:bold;
+}
 
-    /* --------------------- STICKY CTA --------------------- */
-    .sticky-cta { position:fixed; bottom:20px; right:20px; background:#ff5a5f; color:#fff; padding:15px 25px; border-radius:50px; font-weight:bold; cursor:pointer; z-index:200; box-shadow:0 5px 15px rgba(0,0,0,0.3); transition:0.3s; }
-    .sticky-cta:hover { background:#e04b4e; transform:scale(1.05); }
+.menu a{
+margin-left:20px;
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
 
-    /* --------------------- FOOTER --------------------- */
-    footer { padding:50px 20px; text-align:center; background:#222; color:#fff; }
-    footer a { color:#1e90ff; font-weight:bold; }
-    footer p { margin:5px 0; }
+/* HERO */
 
-    /* --------------------- RESPONSIVE --------------------- */
-    @media(max-width:768px) {
-      nav ul { display:none; flex-direction:column; background:#fff; position:absolute; top:70px; left:0; width:100%; padding:20px; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-      nav ul.open { display:flex; }
-      .menu-toggle { display:block; color:#111; }
-      .hero-content h1 { font-size:2rem; }
-      .hero-content p { font-size:1rem; }
-      .overlay-hero { flex-direction:column; padding:60px 20px; }
-      .feature-block { max-width:100%; }
-      .early-support { padding:80px 20px; }
-    }
-  </style>
+.hero{
+height:90vh;
+background-image:url("hero.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.hero-content{
+background:rgba(0,0,0,0.4);
+padding:40px;
+border-radius:10px;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.button{
+background:#2c7be5;
+color:white;
+padding:14px 26px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* SECTIONS */
+
+.section{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* BLUE SECTION */
+
+.blue{
+background:#2c7be5;
+color:white;
+}
+
+/* EMAIL */
+
+.email-box{
+margin-top:30px;
+}
+
+.email-box input{
+padding:12px;
+border:none;
+border-radius:20px;
+margin-right:10px;
+}
+
+.email-box button{
+padding:12px 20px;
+border:none;
+border-radius:20px;
+background:white;
+color:#2c7be5;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+</style>
+
 </head>
+
 <body>
 
 <header>
-  <div class="container">
-    <div class="logo" onclick="scrollToTop()">DaVinci Glamping</div>
-    <nav id="menu">
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#features">Vision</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#early-support">Support Us</a></li>
-        <li><a href="https://zj1hin-kd.myshopify.com/?utm_source=website&utm_medium=nav&utm_campaign=top_nav" target="_blank" rel="noopener noreferrer">Store</a></li>
-        <li><a href="#experience">Experience</a></li>
-      </ul>
-    </nav>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  </div>
-</header>
 
-<main>
+<nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section" id="hero">
-    <div class="hero-content">
-      <h1>Welcome to DaVinci Glamping</h1>
-      <p>Nature, Technology & Freedom in Colorado</p>
-      <a href="#early-support" class="btn">Join Our Early Supporters</a>
-    </div>
-  </section>
+<div class="logo">Da Vinci Glamping</div>
 
-  <!-- Overlay Features -->
-  <section class="overlay-hero" id="features">
-    <div class="feature-block">
-      <h2>Luxury & Nature</h2>
-      <p>Sleep under the stars in geodesic domes. Comfort meets the wild.</p>
-    </div>
-    <div class="feature-block">
-      <h2>Technology & Stargazing</h2>
-      <p>Smart domes, telescopes, AR experiences. Explore the future today.</p>
-    </div>
-    <div class="feature-block">
-      <h2>Freedom & Future</h2>
-      <p>Family dreams, new ways to travel, and life beyond the ordinary.</p>
-    </div>
-  </section>
-
-  <!-- Early Support Section -->
-  <section id="early-support" class="early-support">
-    <div class="container">
-      <h2>Be Part of the Revolution</h2>
-      <p>Sign up as an early supporter and get exclusive updates & previews.</p>
-      <form action="https://formspree.io/f/maypvqez" method="POST">
-        <input type="email" name="email" placeholder="Your email address" required>
-        <button type="submit">Join Now</button>
-      </form>
-    </div>
-  </section>
-
-</main>
-
-<!-- Sticky CTA -->
-<div class="sticky-cta" onclick="document.getElementById('early-support').scrollIntoView({behavior:'smooth'})">
-  Join Early Supporters
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="vision.html">Vision</a>
+<a href="experience.html">Experience</a>
+<a href="gallery.html">Gallery</a>
+<a href="support.html">Support</a>
+<a href="shop.html">Store</a>
 </div>
 
+</nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>The Future of Glamping in Colorado</h1>
+
+<p>Off-grid cabins, clean energy and next-generation outdoor hospitality.</p>
+
+<a class="button" href="support.html">Join Early Supporters</a>
+
+</div>
+
+</section>
+
+
+<!-- VISION -->
+
+<section class="section">
+
+<h2>Nature and Technology Can Finally Coexist</h2>
+
+<p>
+Da Vinci Glamping is exploring a new model of tourism where innovation,
+clean energy and nature work together instead of competing.
+</p>
+
+<p>
+This project aims to create an outdoor destination where guests experience
+the wilderness while surrounded by smart infrastructure,
+off-grid systems and next-generation hospitality design.
+</p>
+
+</section>
+
+
+<!-- EXPERIENCE -->
+
+<section class="section">
+
+<h2>The Experience</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Luxury & Nature</h3>
+<p>Sleep under the stars in modular cabins designed for comfort in the wild.</p>
+</div>
+
+<div class="card">
+<h3>Technology & Stargazing</h3>
+<p>Smart domes, AI-guided telescopes and immersive night sky experiences.</p>
+</div>
+
+<div class="card">
+<h3>Off-Grid Living</h3>
+<p>Clean energy systems designed for the next generation of sustainable travel.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WHY THIS PROJECT -->
+
+<section class="section">
+
+<h2>Why This Project Exists</h2>
+
+<p>
+Tourism infrastructure has barely changed in decades.
+Hotels still dominate the landscape even when travelers are seeking
+authentic experiences in nature.
+</p>
+
+<p>
+Da Vinci Glamping explores a different idea:
+what if outdoor hospitality could be smarter, lighter on the land,
+and powered by clean technology?
+</p>
+
+<p>
+This project is currently in early development
+while studying land opportunities in Northern Colorado.
+</p>
+
+</section>
+
+
+<!-- SUPPORTERS -->
+
+<section class="section blue">
+
+<h2>Be Part of the Journey</h2>
+
+<p>
+Join the early supporters community and follow the development
+of Da Vinci Glamping.
+</p>
+
+<div class="email-box">
+
+<input placeholder="Your email address">
+
+<button>Join Now</button>
+
+</div>
+
+</section>
+
+
 <footer>
-  <p>Follow our journey. Join the Renaissance.</p>
-  <p>Instagram: <a href="https://www.instagram.com/davinciglamping" target="_blank">@DaVinciGlamping</a></p>
+
+<p>Follow our journey. Join the Renaissance.</p>
+
+<p>Building the future of outdoor hospitality in Colorado.</p>
+
+<p>Instagram: @DaVinciGlamping</p>
+
 </footer>
 
-<script>
-function toggleMenu() {
-  const nav = document.getElementById("menu");
-  nav.classList.toggle("open");
-}
-function scrollToTop() {
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-</script>
 
 </body>
 </html>
