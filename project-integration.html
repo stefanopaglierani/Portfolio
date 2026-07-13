@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware-Software Integration | Stefano Paglierani</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--accent);
+        }
+
+        /* PROJECT HEADER */
+        .project-hero {
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .project-hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .project-hero h2 {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tech-tag {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        /* CONTENT SECTIONS */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .content-section {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h3 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            color: var(--text-muted);
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+        }
+
+        .content-section li strong {
+            color: var(--text-main);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="project-hero">
+        <h1>Hardware-Software Integration</h1>
+        <h2>Da Vinci Concept: A Smart-Living Ecosystem Case Study</h2>
+        
+        <div class="tech-tags">
+            <span class="tech-tag">IoT Integration</span>
+            <span class="tech-tag">Digital Workflows</span>
+            <span class="tech-tag">E-Commerce Architecture</span>
+            <span class="tech-tag">Web UI/UX</span>
+            <span class="tech-tag">Clean Energy Systems</span>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <!-- OVERVIEW -->
+        <div class="content-section">
+            <h3>Project Overview</h3>
+            <p>The Da Vinci Concept is an entrepreneurial tech initiative focused on creating a fully off-grid, automated hospitality environment. The core challenge of this project was not just conceptualizing physical infrastructure, but architecting the digital nervous system required to run it.</p>
+            <p>Acting as the founder and lead integrator, my focus has been on merging clean energy hardware with smart-home logic, while simultaneously building the digital storefront and web infrastructure to manage the user experience from end to end.</p>
+        </div>
+
+        <!-- DIGITAL INFRASTRUCTURE -->
+        <div class="content-section">
+            <h3>Digital Infrastructure & Workflows</h3>
+            <ul>
+                <li><strong>Web Development & UI:</strong> Designed and implemented the front-end web architecture (HTML/CSS), ensuring a responsive and intuitive user interface for the digital storefront.</li>
+                <li><strong>E-Commerce Integration:</strong> Architected the digital workflow for the online store, focusing on user flow optimization and seamless digital transaction environments.</li>
+                <li><strong>Automated Guest Experience:</strong> Conceptualizing data loops where front-end user inputs directly influence backend hospitality management systems.</li>
+            </ul>
+        </div>
+
+        <!-- SMART LIVING -->
+        <div class="content-section">
+            <h3>Smart-Living & Hardware Integration</h3>
+            <p>The physical application of the project serves as a testing ground for hardware-software synergy:</p>
+            <ul>
+                <li><strong>Off-Grid Logic:</strong> Designing integration points for clean energy infrastructure, ensuring power systems can communicate with environmental control sensors.</li>
+                <li><strong>Modular Tech Enclosures:</strong> Bridging the gap between automated smart home technology and physical modular design, proving that advanced tech can operate seamlessly in remote environments.</li>
+            </ul>
+        </div>
+
+        <!-- OUTCOME -->
+        <div class="content-section">
+            <h3>The Builder's Mindset</h3>
+            <p>Managing this initiative demonstrates a comprehensive "full-stack" approach to problem-solving. It requires the ability to write front-end code, architect digital workflows, and understand the physical constraints of hardware integration—a holistic engineering mindset that I apply to all software development projects.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
+</body>
+</html>
