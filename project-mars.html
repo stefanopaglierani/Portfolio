@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Simulation - Case Study | Stefano Paglierani</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--accent);
+        }
+
+        /* PROJECT HEADER */
+        .project-hero {
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .project-hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .project-hero h2 {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tech-tag {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        /* CONTENT SECTIONS */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .content-section {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h3 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            color: var(--text-muted);
+            padding-left: 20px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+        }
+
+        .content-section li strong {
+            color: var(--text-main);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="project-hero">
+        <h1>Mars Survival Simulation</h1>
+        <h2>Systems Architecture & Procedural Logic Case Study</h2>
+        
+        <div class="tech-tags">
+            <span class="tech-tag">Luau</span>
+            <span class="tech-tag">OOP</span>
+            <span class="tech-tag">State Management</span>
+            <span class="tech-tag">Roblox Studio Engine</span>
+            <span class="tech-tag">Algorithmic Debugging</span>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <!-- OVERVIEW -->
+        <div class="content-section">
+            <h3>Project Overview</h3>
+            <p>The "Mars" project is a highly complex, logic-driven simulation environment engineered entirely in Luau. Acting as the sole developer and systems architect, my objective was to build a robust framework capable of handling real-time procedural generation, dynamic user state management, and seamless UI integration without performance degradation.</p>
+            <p>Rather than relying on pre-built scripts, the core of this project relies on custom-built Object-Oriented Programming (OOP) paradigms to ensure scalability and modularity of the codebase.</p>
+        </div>
+
+        <!-- TECHNICAL ARCHITECTURE -->
+        <div class="content-section">
+            <h3>Core Systems Architecture</h3>
+            <ul>
+                <li><strong>Dynamic State Management:</strong> Engineered the primary survival loops. The system tracks multiple concurrent variables per user (oxygen depletion, thermal regulation, stamina) executing in real-time across the server-client boundary.</li>
+                <li><strong>Procedural Generation Systems:</strong> Developed algorithms for the procedural spawning of environmental elements and resource nodes, ensuring that the simulation environment remains dynamic while maintaining strict server-side logic control.</li>
+                <li><strong>Custom UI/UX Framework:</strong> Built functional, interactive user interfaces completely from scratch. The UI dynamically listens to server state changes and updates client-side displays instantly, requiring complex data replication management.</li>
+            </ul>
+        </div>
+
+        <!-- DEBUGGING & PROBLEM SOLVING -->
+        <div class="content-section">
+            <h3>Advanced Debugging & AI Integration</h3>
+            <p>Developing complex survival mechanics inherently creates execution bottlenecks and endless logic loops. To maintain development velocity, I integrated a modern problem-solving approach:</p>
+            <ul>
+                <li><strong>LLM-Assisted Optimization:</strong> Actively leveraged Large Language Models to diagnose logic faults, optimize Luau arrays, and resolve cross-script execution bugs.</li>
+                <li><strong>Memory Leak Prevention:</strong> Restructured event connections and attachment points within the engine to prevent memory leaks during extended simulation runtimes.</li>
+            </ul>
+        </div>
+
+        <!-- OUTCOME -->
+        <div class="content-section">
+            <h3>Technical Takeaways</h3>
+            <p>This project serves as a testament to my ability to conceptualize, architect, and execute complex software systems. It highlights my proficiency in Luau, my understanding of client-server network boundaries, and my relentless drive to troubleshoot intricate logic under the hood of a powerful engine.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
+</body>
+</html>
