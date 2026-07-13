@@ -1,298 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stefano Paglierani | Software Developer & Automation Specialist</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+        }
 
-<title>Da Vinci Glamping | Future of Off-Grid Tourism</title>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
 
-<style>
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#f5f5f5;
-color:#333;
-}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-/* NAVBAR */
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-header{
-background:white;
-padding:20px;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
+        .logo span {
+            color: var(--accent);
+        }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-max-width:1200px;
-margin:auto;
-}
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-.logo{
-font-size:22px;
-font-weight:bold;
-}
+        .menu a:hover {
+            color: var(--accent);
+        }
 
-.menu a{
-margin-left:20px;
-text-decoration:none;
-color:#333;
-font-weight:500;
-}
+        /* HERO SECTION */
+        .hero {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
 
-/* HERO */
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
 
-.hero{
-height:90vh;
-background-image:url("hero.jpg");
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
-}
+        .hero h2 {
+            font-size: 28px;
+            color: var(--accent);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
 
-.hero-content{
-background:rgba(0,0,0,0.4);
-padding:40px;
-border-radius:10px;
-}
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
 
-.hero h1{
-font-size:48px;
-margin-bottom:10px;
-}
+        /* TECH STACK */
+        .tech-stack {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
 
-.hero p{
-font-size:20px;
-margin-bottom:30px;
-}
+        .tech-tag {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--accent);
+        }
 
-.button{
-background:#2c7be5;
-color:white;
-padding:14px 26px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
-}
+        /* PROJECTS GRID */
+        .section-title {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
+            font-size: 32px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
 
-/* SECTIONS */
+        .projects {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px 100px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
 
-.section{
-max-width:1100px;
-margin:auto;
-padding:80px 20px;
-text-align:center;
-}
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            transition: transform 0.3s;
+        }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
 
-.card{
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 20px rgba(0,0,0,0.05);
-}
+        .project-card h3 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
 
-/* BLUE SECTION */
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
 
-.blue{
-background:#2c7be5;
-color:white;
-}
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            padding: 10px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
 
-/* EMAIL */
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+        }
 
-.email-box{
-margin-top:30px;
-}
-
-.email-box input{
-padding:12px;
-border:none;
-border-radius:20px;
-margin-right:10px;
-}
-
-.email-box button{
-padding:12px 20px;
-border:none;
-border-radius:20px;
-background:white;
-color:#2c7be5;
-font-weight:bold;
-}
-
-/* FOOTER */
-
-footer{
-background:#111;
-color:white;
-padding:40px;
-text-align:center;
-}
-
-</style>
-
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #334155;
+            color: var(--text-muted);
+            margin-top: 50px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
 
-<nav>
+    <section class="hero">
+        <h1>Bridging Software Logic <br>and Industrial Mechanics.</h1>
+        <h2>Software Developer & Automation Specialist</h2>
+        <p>I build complex procedural systems, engineer dynamic gameplay loops, and troubleshoot advanced manufacturing software. Based in Italy, open to relocation in the USA.</p>
+        
+        <div class="tech-stack">
+            <span class="tech-tag">Luau Scripting</span>
+            <span class="tech-tag">Systems Architecture</span>
+            <span class="tech-tag">Procedural Generation</span>
+            <span class="tech-tag">CNC Maestro Suite</span>
+            <span class="tech-tag">LLM Debugging</span>
+            <span class="tech-tag">UI/UX Integration</span>
+        </div>
+    </section>
 
-<div class="logo">Da Vinci Glamping</div>
+    <h2 class="section-title" id="projects">Featured Engineering & Development</h2>
 
-<div class="menu">
-<a href="index.html">Home</a>
-<a href="vision.html">Vision</a>
-<a href="experience.html">Experience</a>
-<a href="gallery.html">Gallery</a>
-<a href="support.html">Support</a>
-<a href="shop.html">Store</a>
-</div>
+    <section class="projects">
+        
+        <!-- PROJECT 1: MARS -->
+        <div class="project-card">
+            <h3>Mars Survival Simulation</h3>
+            <p>A complex, logic-driven environment engineered entirely in Luau. Features include procedural generation, real-time resource tracking, state management, and custom functional UI elements built from scratch.</p>
+            <a href="project-mars.html" class="btn">View Technical Details</a>
+        </div>
 
-</nav>
+        <!-- PROJECT 2: CNC AUTOMATION -->
+        <div class="project-card">
+            <h3>CNC Software Architecture</h3>
+            <p>Active exploration and diagnostics of the SCM Maestro Software Suite. Bridging the gap between software programming and physical multi-axis mechanical execution in advanced manufacturing centers.</p>
+            <a href="project-cnc.html" class="btn">View Case Study</a>
+        </div>
 
-</header>
+        <!-- PROJECT 3: DA VINCI (REBRANDED) -->
+        <div class="project-card">
+            <h3>Hardware-Software Integration</h3>
+            <p>Da Vinci Glamping Concept: Designed a cohesive smart-living system integrating clean energy infrastructure, automated smart home technology, and digital storefront workflows into a single ecosystem.</p>
+            <a href="project-integration.html" class="btn">View Architecture</a>
+        </div>
 
+    </section>
 
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>The Future of Glamping in Colorado</h1>
-
-<p>Off-grid cabins, clean energy and next-generation outdoor hospitality.</p>
-
-<a class="button" href="support.html">Join Early Supporters</a>
-
-</div>
-
-</section>
-
-
-<!-- VISION -->
-
-<section class="section">
-
-<h2>Nature and Technology Can Finally Coexist</h2>
-
-<p>
-Da Vinci Glamping is exploring a new model of tourism where innovation,
-clean energy and nature work together instead of competing.
-</p>
-
-<p>
-This project aims to create an outdoor destination where guests experience
-the wilderness while surrounded by smart infrastructure,
-off-grid systems and next-generation hospitality design.
-</p>
-
-</section>
-
-
-<!-- EXPERIENCE -->
-
-<section class="section">
-
-<h2>The Experience</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Luxury & Nature</h3>
-<p>Sleep under the stars in modular cabins designed for comfort in the wild.</p>
-</div>
-
-<div class="card">
-<h3>Technology & Stargazing</h3>
-<p>Smart domes, AI-guided telescopes and immersive night sky experiences.</p>
-</div>
-
-<div class="card">
-<h3>Off-Grid Living</h3>
-<p>Clean energy systems designed for the next generation of sustainable travel.</p>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- WHY THIS PROJECT -->
-
-<section class="section">
-
-<h2>Why This Project Exists</h2>
-
-<p>
-Tourism infrastructure has barely changed in decades.
-Hotels still dominate the landscape even when travelers are seeking
-authentic experiences in nature.
-</p>
-
-<p>
-Da Vinci Glamping explores a different idea:
-what if outdoor hospitality could be smarter, lighter on the land,
-and powered by clean technology?
-</p>
-
-<p>
-This project is currently in early development
-while studying land opportunities in Northern Colorado.
-</p>
-
-</section>
-
-
-<!-- SUPPORTERS -->
-
-<section class="section blue">
-
-<h2>Be Part of the Journey</h2>
-
-<p>
-Join the early supporters community and follow the development
-of Da Vinci Glamping.
-</p>
-
-<div class="email-box">
-
-<input placeholder="Your email address">
-
-<button>Join Now</button>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<p>Follow our journey. Join the Renaissance.</p>
-
-<p>Building the future of outdoor hospitality in Colorado.</p>
-
-<p>Instagram: @DaVinciGlamping</p>
-
-</footer>
-
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
 
 </body>
 </html>
