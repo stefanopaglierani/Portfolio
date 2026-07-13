@@ -137,7 +137,7 @@
         code {
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 14px;
-            color: #6ee7b7; /* Un verde hacker elegante */
+            color: #6ee7b7; /* Verde hacker elegante */
         }
         
         .code-comment {
@@ -174,11 +174,11 @@
 
     <div class="article-header">
         <span class="article-tag">Software Development / Luau</span>
-        <h1>Handling Client-Server Boundaries in Procedural Survival Mechanics</h1>
+        <h1>Server-Side Validation & State Management in Procedural Environments</h1>
         <div class="article-meta">
             <span>By Stefano Paglierani</span>
             <span>•</span>
-            <span>Est. Read: 7 mins</span>
+            <span>Est. Read: 10 mins</span>
             <span>•</span>
             <span>Systems Architecture</span>
         </div>
@@ -186,53 +186,91 @@
 
     <div class="article-content">
         
-        <p><em>[INTRODUZIONE - Scrivi qui 3 o 4 righe per spiegare il problema. Ad esempio: Quando si costruisce un sistema di sopravvivenza complesso, il vero nemico non è la logica in sé, ma la latenza di rete e la gestione della memoria. In questo articolo, analizzeremo come ho strutturato il loop di sopravvivenza del progetto Mars per evitare memory leaks...]</em></p>
-
-        <h2>The Architecture Problem: State Replication</h2>
-        <p>In a standard Roblox environment, letting the client handle essential logic is a massive security and synchronization flaw. However, forcing the server to calculate every micro-tick of stamina or oxygen depletion for every user simultaneously creates a severe processing bottleneck.</p>
+        <p>In developing complex simulation environments within Roblox Studio, maintaining the integrity of the client-server boundary is paramount. When building a procedural survival game with an intricate crafting and building system, allowing the client to dictate state changes is a fundamental security flaw that invites exploits and synchronization errors.</p>
         
-        <p>The solution requires a strict Object-Oriented approach (OOP) within Luau to handle data state efficiently.</p>
+        <p>This technical dive explores the architecture of a custom <code>BuilderService</code>, a robust server-side module designed to handle crafting logic, resource validation, and procedural asset instantiation securely.</p>
 
-        <h3>1. Constructing the Data Class</h3>
-        <p>Below is a simplified extraction of the core module script responsible for initializing a player's survival state. We use metatables to instantiate individual user objects.</p>
+        <h2>The Architecture Problem: Secure Crafting Logic</h2>
+        <p>The core challenge is processing dynamic player requests (e.g., "Build a Moisture Extractor") against a complex set of dependencies—checking shared global resources, verifying propaedeutic technology unlocks, and ensuring the correct procedural placement of the asset in the world—all without halting the server thread or creating execution bottlenecks.</p>
 
-        <!-- QUI INIZIA IL BLOCCO DI CODICE -->
-        <pre><code><span class="code-comment">-- PlayerSurvivalState.lua (ModuleScript)</span>
-<span class="code-keyword">local</span> SurvivalManager = {}
-SurvivalManager.__index = SurvivalManager
+        <h3>1. The Data Structure: The Recipe Dictionary</h3>
+        <p>To ensure scalability, the crafting logic is decoupled from the execution logic[cite: 1]. I implemented a centralized, dictionary-based data structure (<code>CRAFT_RECIPES</code>) that acts as the single source of truth for all buildable assets[cite: 1].</p>
+        
+        <p>This approach allows for rapid balancing and the addition of new items without modifying the core validation algorithms[cite: 1]. Each entry defines resource costs, item types (Structure, Upgrade, VIP), and propaedeutic requirements (<code>Requires</code>)[cite: 1].</p>
 
-<span class="code-keyword">function</span> SurvivalManager.new(player)
-    <span class="code-keyword">local</span> self = setmetatable({}, SurvivalManager)
-    
-    self.Player = player
-    self.Oxygen = 100
-    self.Stamina = 100
-    self.IsAlive = <span class="code-keyword">true</span>
-    
-    <span class="code-comment">-- INSERISCI QUI IL TUO CODICE REALE IN LUAU</span>
-    <span class="code-comment">-- Usa questa formattazione per mostrare ai recruiter come scrivi.</span>
-    
-    <span class="code-keyword">return</span> self
+        <pre><code><span class="code-comment">-- 📖 IL LIBRO DELLE RICETTE</span>
+<span class="code-keyword">local</span> CRAFT_RECIPES = {
+    [<span class="code-keyword">"MoistureExtractor"</span>] = { Rock = 15, Permafrost = 5, Type = <span class="code-keyword">"Structure"</span>, Requires = <span class="code-keyword">nil</span> },
+    [<span class="code-keyword">"PlanterBox"</span>] = { Rock = 10, Permafrost = 5, Type = <span class="code-keyword">"Structure"</span>, Requires = <span class="code-keyword">"MoistureExtractor"</span> },
+    [<span class="code-keyword">"ResidentialCoreSystem"</span>] = { Rock = 50, Crystal = 5, Gold = 20, Type = <span class="code-keyword">"Expansion"</span>, Slot = <span class="code-keyword">"Slot_Residential"</span>, Blueprint = <span class="code-keyword">"Residential"</span> },
+    [<span class="code-keyword">"TechDrillLV2"</span>] = { Rock = 20, Gold = 5, Type = <span class="code-keyword">"Upgrade"</span>, Requires = <span class="code-keyword">nil</span> },
+    [<span class="code-keyword">"MechaSuite"</span>] = { Type = <span class="code-keyword">"VIP"</span>, GamepassID = 987654321 }      
+}</code></pre>
+
+        <h2>Validation & Procedural Instantiation</h2>
+        <p>When a client issues a <code>BuildRequest</code> via a RemoteEvent, the server intercepts the call and runs it through a strict, multi-tiered validation pipeline[cite: 1].</p>
+
+        <h3>2. The Validation Pipeline</h3>
+        <p>The server independently verifies the request against three critical parameters before any resources are deducted or assets spawned[cite: 1]:</p>
+        <ol>
+            <li><strong>Premium Access Security:</strong> If the requested item is tagged as "VIP", the script queries the <code>MarketplaceService</code> to asynchronously verify ownership, logging potential bypass attempts[cite: 1].</li>
+            <li><strong>Propaedeutic Checks:</strong> It verifies if the player holds the required custom attributes (e.g., verifying if a player has built a <code>MoistureExtractor</code> before allowing a <code>PlanterBox</code>)[cite: 1].</li>
+            <li><strong>Resource Verification:</strong> A dedicated function (<code>checkResources</code>) compares the recipe costs against real-time global values stored in <code>ReplicatedStorage</code>[cite: 1].</li>
+        </ol>
+
+        <pre><code><span class="code-comment">-- 🛑 Controllo Requisiti Base (Propedeuticità)</span>
+<span class="code-keyword">if</span> recipe.Requires <span class="code-keyword">and not</span> player:GetAttribute(<span class="code-keyword">"Has_"</span> .. recipe.Requires) <span class="code-keyword">then</span>
+    aresResponse:FireClient(player, <span class="code-keyword">"ACCESS DENIED: BUILD "</span> .. string.upper(recipe.Requires) .. <span class="code-keyword">" FIRST."</span>, <span class="code-keyword">true</span>)
+    <span class="code-keyword">return</span>
 <span class="code-keyword">end</span>
 
-<span class="code-keyword">function</span> SurvivalManager:DepleteOxygen(amount)
-    <span class="code-keyword">if</span> not self.IsAlive <span class="code-keyword">then return end</span>
-    self.Oxygen = math.clamp(self.Oxygen - amount, 0, 100)
-    
-    <span class="code-keyword">if</span> self.Oxygen <= 0 <span class="code-keyword">then</span>
-        self:TriggerDeath("Asphyxiation")
-    <span class="code-keyword">end</span>
+<span class="code-comment">-- 💰 Controllo Risorse Multiplo</span>
+<span class="code-keyword">local function</span> checkResources(recipe)
+    <span class="code-keyword">if</span> recipe.Rock <span class="code-keyword">and</span> storedRock.Value < recipe.Rock <span class="code-keyword">then return false end</span>
+    <span class="code-keyword">if</span> recipe.Permafrost <span class="code-keyword">and</span> storedPermafrost.Value < recipe.Permafrost <span class="code-keyword">then return false end</span>
+    <span class="code-keyword">if</span> recipe.Gold <span class="code-keyword">and</span> storedGold.Value < recipe.Gold <span class="code-keyword">then return false end</span>
+    <span class="code-keyword">if</span> recipe.Crystal <span class="code-keyword">and</span> storedCrystal.Value < recipe.Crystal <span class="code-keyword">then return false end</span>
+    <span class="code-keyword">return true</span>
 <span class="code-keyword">end</span></code></pre>
-        <!-- QUI FINISCE IL BLOCCO DI CODICE -->
 
-        <h2>Managing the Network Overhead</h2>
-        <p><em>[SPIEGAZIONE - Qui puoi spiegare a parole tue come fai a comunicare questi dati dal Server al Client per aggiornare l'interfaccia utente (UI) senza far laggare il server. Usa RemoteEvents, ottimizzazione dei tickrate, ecc.]</em></p>
+        <h3>3. Dynamic Asset Spawning</h3>
+        <p>Once validated, the system handles the physical manifestation of the request[cite: 1]. The <code>spawnStructure</code> function handles the procedural placement of models[cite: 1]. It locates a designated spawn folder in the Workspace, selects a random available location node (to prevent structural overlap), calculates the correct bounding box offset to ensure the model sits flush with the terrain, and pivots the cloned asset into position[cite: 1]. The location node is then destroyed to prevent future overlapping spawns[cite: 1].</p>
 
-        <h3>2. The Garbage Collection Challenge</h3>
-        <p><em>[SPIEGAZIONE - Parla di come gestisci le 'Connections' quando un giocatore muore o esce dal server. Spiega come eviti che le variabili rimangano sospese occupando memoria RAM.]</em></p>
+        <pre><code><span class="code-keyword">local function</span> spawnStructure(itemName, player)
+    <span class="code-keyword">local</span> templateName = (itemName == <span class="code-keyword">"MoistureExtractor"</span>) <span class="code-keyword">and "watertower" or</span> itemName
+    <span class="code-keyword">local</span> template = ReplicatedStorage:FindFirstChild(templateName)
+    <span class="code-keyword">local</span> locations = Workspace:FindFirstChild(itemName .. <span class="code-keyword">"Locations"</span>)
+
+    <span class="code-comment">-- Validazione robusta dei target</span>
+    <span class="code-keyword">if not</span> template <span class="code-keyword">then return false</span>, <span class="code-keyword">"SYSTEM ERROR" end</span>
+    <span class="code-keyword">if not</span> locations <span class="code-keyword">or</span> #locations:GetChildren() == 0 <span class="code-keyword">then return false</span>, <span class="code-keyword">"NO BUILD LOCATION" end</span>
+
+    <span class="code-keyword">local</span> spots = locations:GetChildren()
+    <span class="code-keyword">local</span> chosen = spots[math.random(1, #spots)]
+    <span class="code-keyword">local</span> clone = template:Clone()
+
+    <span class="code-comment">-- Calcolo dell'offset in base alla classe dell'oggetto</span>
+    <span class="code-keyword">local</span> halfHeight = 0
+    <span class="code-keyword">if</span> clone:IsA(<span class="code-keyword">"Model"</span>) <span class="code-keyword">then</span>
+        <span class="code-keyword">local</span> _, size = clone:GetBoundingBox()
+        halfHeight = size.Y / 2
+    <span class="code-keyword">elseif</span> clone:IsA(<span class="code-keyword">"BasePart"</span>) <span class="code-keyword">then</span>
+        halfHeight = clone.Size.Y / 2
+    <span class="code-keyword">end</span>
+
+    <span class="code-keyword">local</span> finalCFrame = chosen.CFrame * CFrame.new(0, halfHeight, 0)
+    <span class="code-keyword">if</span> clone:IsA(<span class="code-keyword">"Model"</span>) <span class="code-keyword">then</span> clone:PivotTo(finalCFrame) <span class="code-keyword">else</span> clone.CFrame = finalCFrame <span class="code-keyword">end</span>
+
+    clone.Parent = Workspace
+    chosen:Destroy()
+    <span class="code-keyword">return true</span>, <span class="code-keyword">""</span>
+<span class="code-keyword">end</span></code></pre>
+
+        <h2>Dynamic Inventory Management</h2>
+        <p>Beyond structural spawns, the script dynamically manages player inventory upgrades[cite: 1]. When an upgrade like a <code>TechDrillLV2</code> or a <code>BackPackLV3</code> is validated, the server iterates through both the player's <code>Backpack</code> and physically equipped <code>Character</code> to locate and destroy obsolete instances of the tool before cloning and injecting the upgraded version[cite: 1]. This ensures inventory state consistency and prevents item duplication exploits[cite: 1].</p>
 
         <h2>Conclusion</h2>
-        <p>Building logic in Luau requires anticipating scale. By strictly separating the server's authority over data state from the client's responsibility to render UI, we ensure the simulation remains fluid even under heavy procedural loads.</p>
+        <p>By enforcing a strict validation pipeline on the server and utilizing dictionary-driven logic, the <code>BuilderService</code> ensures that the simulation remains secure, scalable, and modular[cite: 1]. It serves as a prime example of translating complex operational logic into a robust backend architecture.</p>
 
     </div>
 
