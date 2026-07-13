@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Client-Server Boundaries in Luau | Stefano Paglierani</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--accent);
+        }
+
+        /* ARTICLE HEADER */
+        .article-header {
+            max-width: 800px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+        }
+
+        .article-tag {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .article-header h1 {
+            font-size: 42px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            color: var(--text-muted);
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* ARTICLE CONTENT */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            color: #cbd5e1;
+        }
+
+        .article-content h2 {
+            color: var(--text-main);
+            font-size: 28px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .article-content h3 {
+            color: var(--accent);
+            font-size: 22px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        /* CODE BLOCK STYLING */
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            color: #6ee7b7; /* Un verde hacker elegante */
+        }
+        
+        .code-comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #c084fc;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="article-header">
+        <span class="article-tag">Software Development / Luau</span>
+        <h1>Handling Client-Server Boundaries in Procedural Survival Mechanics</h1>
+        <div class="article-meta">
+            <span>By Stefano Paglierani</span>
+            <span>•</span>
+            <span>Est. Read: 7 mins</span>
+            <span>•</span>
+            <span>Systems Architecture</span>
+        </div>
+    </div>
+
+    <div class="article-content">
+        
+        <p><em>[INTRODUZIONE - Scrivi qui 3 o 4 righe per spiegare il problema. Ad esempio: Quando si costruisce un sistema di sopravvivenza complesso, il vero nemico non è la logica in sé, ma la latenza di rete e la gestione della memoria. In questo articolo, analizzeremo come ho strutturato il loop di sopravvivenza del progetto Mars per evitare memory leaks...]</em></p>
+
+        <h2>The Architecture Problem: State Replication</h2>
+        <p>In a standard Roblox environment, letting the client handle essential logic is a massive security and synchronization flaw. However, forcing the server to calculate every micro-tick of stamina or oxygen depletion for every user simultaneously creates a severe processing bottleneck.</p>
+        
+        <p>The solution requires a strict Object-Oriented approach (OOP) within Luau to handle data state efficiently.</p>
+
+        <h3>1. Constructing the Data Class</h3>
+        <p>Below is a simplified extraction of the core module script responsible for initializing a player's survival state. We use metatables to instantiate individual user objects.</p>
+
+        <!-- QUI INIZIA IL BLOCCO DI CODICE -->
+        <pre><code><span class="code-comment">-- PlayerSurvivalState.lua (ModuleScript)</span>
+<span class="code-keyword">local</span> SurvivalManager = {}
+SurvivalManager.__index = SurvivalManager
+
+<span class="code-keyword">function</span> SurvivalManager.new(player)
+    <span class="code-keyword">local</span> self = setmetatable({}, SurvivalManager)
+    
+    self.Player = player
+    self.Oxygen = 100
+    self.Stamina = 100
+    self.IsAlive = <span class="code-keyword">true</span>
+    
+    <span class="code-comment">-- INSERISCI QUI IL TUO CODICE REALE IN LUAU</span>
+    <span class="code-comment">-- Usa questa formattazione per mostrare ai recruiter come scrivi.</span>
+    
+    <span class="code-keyword">return</span> self
+<span class="code-keyword">end</span>
+
+<span class="code-keyword">function</span> SurvivalManager:DepleteOxygen(amount)
+    <span class="code-keyword">if</span> not self.IsAlive <span class="code-keyword">then return end</span>
+    self.Oxygen = math.clamp(self.Oxygen - amount, 0, 100)
+    
+    <span class="code-keyword">if</span> self.Oxygen <= 0 <span class="code-keyword">then</span>
+        self:TriggerDeath("Asphyxiation")
+    <span class="code-keyword">end</span>
+<span class="code-keyword">end</span></code></pre>
+        <!-- QUI FINISCE IL BLOCCO DI CODICE -->
+
+        <h2>Managing the Network Overhead</h2>
+        <p><em>[SPIEGAZIONE - Qui puoi spiegare a parole tue come fai a comunicare questi dati dal Server al Client per aggiornare l'interfaccia utente (UI) senza far laggare il server. Usa RemoteEvents, ottimizzazione dei tickrate, ecc.]</em></p>
+
+        <h3>2. The Garbage Collection Challenge</h3>
+        <p><em>[SPIEGAZIONE - Parla di come gestisci le 'Connections' quando un giocatore muore o esce dal server. Spiega come eviti che le variabili rimangano sospese occupando memoria RAM.]</em></p>
+
+        <h2>Conclusion</h2>
+        <p>Building logic in Luau requires anticipating scale. By strictly separating the server's authority over data state from the client's responsibility to render UI, we ensure the simulation remains fluid even under heavy procedural loads.</p>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
+</body>
+</html>
