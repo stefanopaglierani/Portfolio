@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog & Insights | Stefano Paglierani</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--accent);
+        }
+
+        /* HEADER */
+        .blog-hero {
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .blog-hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .blog-hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ARTICLES GRID */
+        .articles-container {
+            max-width: 1000px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            display: grid;
+            gap: 30px;
+        }
+
+        .article-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .article-tag {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .article-card h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        .article-card p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .read-btn {
+            align-self: flex-start;
+            background-color: transparent;
+            color: var(--accent);
+            padding: 8px 16px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .read-btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+        }
+
+        /* BADGE PER ARTICOLI IN LAVORAZIONE */
+        .draft-badge {
+            background-color: #334155;
+            color: #94a3b8;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="blog-hero">
+        <h1>Technical Insights</h1>
+        <p>Whitepapers, architectural teardowns, and engineering notes on systems automation, procedural generation, and Luau development.</p>
+    </div>
+
+    <div class="articles-container">
+
+        <!-- ARTICLE 1 (IN LAVORAZIONE) -->
+        <div class="article-card">
+            <div class="article-tag">Software Development / Luau</div>
+            <h2>Handling Client-Server Boundaries in Procedural Survival Mechanics <span class="draft-badge">Drafting Phase</span></h2>
+            <p>An deep dive into managing network latency, memory leaks, and real-time state replication when building complex survival loops and procedural environments using Object-Oriented Luau.</p>
+            <a href="#" class="read-btn" style="opacity: 0.5; cursor: not-allowed;">Coming Soon</a>
+        </div>
+
+        <!-- ARTICLE 2 (IN LAVORAZIONE) -->
+        <div class="article-card">
+            <div class="article-tag">Industrial Automation / CNC</div>
+            <h2>Bridging the Gap: Diagnostics in the Maestro Suite Ecosystem <span class="draft-badge">Drafting Phase</span></h2>
+            <p>Exploring the translation of high-level software logic into multi-axis mechanical execution, and how to structure a Level 2 troubleshooting framework for advanced manufacturing centers.</p>
+            <a href="#" class="read-btn" style="opacity: 0.5; cursor: not-allowed;">Coming Soon</a>
+        </div>
+
+        <!-- ARTICLE 3 (IN LAVORAZIONE) -->
+        <div class="article-card">
+            <div class="article-tag">Systems Architecture</div>
+            <h2>LLM-Assisted Debugging: Accelerating the Development Cycle <span class="draft-badge">Drafting Phase</span></h2>
+            <p>A practical case study on leveraging generative AI to diagnose logic faults, optimize arrays, and resolve cross-script execution bugs in complex simulated environments.</p>
+            <a href="#" class="read-btn" style="opacity: 0.5; cursor: not-allowed;">Coming Soon</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
+</body>
+</html>
