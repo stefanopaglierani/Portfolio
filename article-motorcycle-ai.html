@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge AI & Headless Architecture for Motorcycles | Stefano Paglierani</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--accent);
+        }
+
+        /* ARTICLE HEADER */
+        .article-header {
+            max-width: 800px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+        }
+
+        .article-tag {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .article-header h1 {
+            font-size: 42px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            color: var(--text-muted);
+            font-size: 14px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* ARTICLE CONTENT */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            color: #cbd5e1;
+        }
+
+        .article-content h2 {
+            color: var(--text-main);
+            font-size: 28px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .article-content h3 {
+            color: var(--accent);
+            font-size: 22px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        
+        .article-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        /* CODE BLOCK STYLING */
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            color: #6ee7b7;
+        }
+        
+        .code-comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #c084fc;
+        }
+        
+        .code-function {
+            color: #fcd34d;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="article-header">
+        <span class="article-tag">Mobile Architecture / Edge AI</span>
+        <h1>Architecting a Headless, Offline-First AI Assistant for Motorcyclists</h1>
+        <div class="article-meta">
+            <span>By Stefano Paglierani</span>
+            <span>•</span>
+            <span>Est. Read: 8 mins</span>
+            <span>•</span>
+            <span>Systems Architecture</span>
+        </div>
+    </div>
+
+    <div class="article-content">
+        
+        <p>Operating a motorcycle demands 100% visual and manual attention. Yet, modern navigation and communication tools rely heavily on screen interactions and constant cellular connectivity. When riding through remote mountain passes, cloud-dependent voice assistants inevitably fail.</p>
+        
+        <p>To solve this, I am architecting a conceptual <strong>Headless React Native Application</strong>: a fully localized, voice-driven AI bridge that interfaces seamlessly with the smartphone OS (Android/iOS) and Bluetooth helmet intercoms, operating entirely in offline environments.</p>
+
+        <h2>1. On-Device AI: The Offline Brain</h2>
+        <p>Relying on cloud APIs (like OpenAI or Google Cloud) introduces latency and guarantees failure in low-coverage zones. The architectural mandate for this project is strict edge computing.</p>
+        
+        <p>By leveraging Small Language Models (SLMs) integrated via <code>llama.rn</code> and local Speech-to-Text (STT) engines like Vosk or Whisper.cpp, the application processes natural language entirely on the device CPU/NPU. This ensures instantaneous response times and preserves total user privacy without transmitting audio packets over the network.</p>
+
+        <h2>2. OS Constraints & Foreground Resource Management</h2>
+        <p>Modern mobile operating systems are aggressive memory managers, swiftly killing resource-heavy background applications to preserve battery life. Running an AI model continuously in the background is architecturally unsustainable.</p>
+
+        <h3>The Dual-Tier Listening Architecture</h3>
+        <p>To bypass OS limitations while conserving power, the app registers as a critical <strong>Foreground Service</strong> and employs a dual-tier processing architecture:</p>
+        <ul>
+            <li><strong>Tier 1 (The Micro-Listener):</strong> A highly optimized, low-power audio listener constantly runs in the background, solely detecting a specific Wake Word.</li>
+            <li><strong>Tier 2 (The Execution Engine):</strong> Only upon detecting the Wake Word does the system momentarily spin up the heavier SLM to process the subsequent command, immediately spinning it back down once the task is executed.</li>
+        </ul>
+
+        <!-- CODE BLOCK CONCEPT -->
+        <pre><code><span class="code-comment">// Conceptual Architecture: Foreground Service Audio Management</span>
+<span class="code-keyword">import</span> { AppRegistry } <span class="code-keyword">from</span> <span class="code-keyword">'react-native'</span>;
+<span class="code-keyword">import</span> ForegroundService <span class="code-keyword">from</span> <span class="code-keyword">'@supersami/rn-foreground-service'</span>;
+<span class="code-keyword">import</span> { VoskEngine } <span class="code-keyword">from</span> <span class="code-keyword">'react-native-vosk'</span>;
+
+<span class="code-function">const</span> <span class="code-keyword">initializeMicroListener</span> = () => {
+    ForegroundService.<span class="code-function">start</span>({
+        id: 144,
+        title: <span class="code-keyword">'System Active'</span>,
+        message: <span class="code-keyword">'Awaiting Voice Commands...'</span>,
+    });
+
+    <span class="code-comment">// Low-power listening state</span>
+    VoskEngine.<span class="code-function">startListening</span>(audioStream, (text) => {
+        <span class="code-keyword">if</span> (text.includes(<span class="code-keyword">"wake_word"</span>)) {
+            <span class="code-function">triggerHeavyModel</span>(); <span class="code-comment">// Spin up the SLM</span>
+        }
+    });
+};</code></pre>
+
+        <h2>3. Audio Focus & The "Ducking" UX</h2>
+        <p>In extreme riding conditions, User Experience (UX) equates to safety. A common flaw in standard apps is the brutal interruption of media playback to announce notifications or incoming calls.</p>
+        
+        <p>Instead of halting audio, the architecture hooks deeply into the OS Audio Manager to implement <strong>Audio Ducking</strong>. When the AI needs to speak, it smoothly attenuates third-party media volume (e.g., Spotify) by 70%, executes the Text-to-Speech (TTS) announcement over the intercom, and seamlessly restores the original media volume. This ensures a non-jarring, continuous flow of information.</p>
+
+        <h2>4. Offline Routing & Map Matching Algorithms</h2>
+        <p>Voice-navigating without the internet requires local vector maps (such as Mapbox or OpenStreetMap derivatives). The critical engineering challenge here is handling raw, noisy GPS data.</p>
+        
+        <p>I am architecting the integration of probabilistic <strong>Map Matching</strong> algorithms. When the rider deviates from the path, the system mathematically "snaps" the inaccurate offline GPS coordinates to the nearest logical vector roadway, recalculating the route instantaneously on the local device without needing to ping a remote routing server.</p>
+
+        <h2>5. Development Methodology: AI as an Exoskeleton</h2>
+        <p>Modern software engineering is evolving beyond manual syntax typing into high-level systems architecture. I approach this project operating as a Tech Lead, utilizing AI Pair Programming environments (like Cursor IDE) as an engineering exoskeleton.</p>
+        
+        <p>By compartmentalizing complex logic into discrete building blocks (audio management, routing, LLM instantiation), I delegate raw code generation to AI agents under my strict architectural supervision. This methodology multiplies development velocity, prevents technical debt, and allows me to focus purely on solving the high-level structural challenges.</p>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
+</body>
+</html>
