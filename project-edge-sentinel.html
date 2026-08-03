@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge Sentinel | Stefano Paglierani</title>
-    <!-- COPIA QUI LO STESSO BLOCCO <style> CHE HAI IN index.html -->
-   <style>
+    <title>Edge Sentinel: Python Background Monitor | Stefano Paglierani</title>
+    <style>
         :root {
             --bg-color: #0f172a;
             --text-main: #f8fafc;
@@ -173,60 +172,112 @@
     </style>
 </head>
 <body>
+
     <header>
-        <a href="index.html">&larr; Back to Portfolio</a>
-        <h1>Edge Sentinel</h1>
-        <p>A Python-Based Background Monitor for Industrial PCs</p>
+        <nav>
+            <div class="logo">S.<span>Paglierani</span></div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="articles.html">Tech Blog</a>
+            </div>
+        </nav>
     </header>
 
-    <main>
-        <section>
-            <h2>The Challenge: Silent Edge Monitoring</h2>
-            <p>In industrial automation, hardware and software must operate in perfect synergy. When working with Industrial PCs (IPCs) on the factory floor, having a reliable, non-intrusive way to monitor system health without disrupting primary control tasks is a strict requirement.</p>
-        </section>
+    <div class="article-header">
+        <span class="article-tag">Python / Edge Computing</span>
+        <h1>Edge Sentinel: Background Monitoring for Industrial PCs</h1>
+        <div class="article-meta">
+            <span>By Stefano Paglierani</span>
+            <span>•</span>
+            <span>Est. Read: 5 mins</span>
+            <span>•</span>
+            <span>Industrial Automation</span>
+        </div>
+    </div>
 
-        <section>
-            <h2>Core Logic & Architecture</h2>
-            <p><strong>[ INCOLLA QUI L'INTRODUZIONE E I BULLET POINTS DEL TUO README ]</strong></p>
-        </section>
-
-        <section>
-            <h2>Robust Logging System</h2>
-            <p>When a system fails on the edge, logs are the only diagnostic tool. Here is a snippet of the logging architecture designed to run silently without filling up IPC storage:</p>
-            <pre><code>
-import logging
-import os
-from logging.handlers import RotatingFileHandler
-
-def setup_logger():
-    log_dir = "C:\\EdgeSentinel\\Logs"
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
+    <div class="article-content">
         
-    log_file = os.path.join(log_dir, 'sentinel_monitor.log')
-    handler = RotatingFileHandler(log_file, maxBytes=5*1024*1024, backupCount=3)
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-    
-    logger = logging.getLogger('EdgeSentinel')
-    logger.setLevel(logging.INFO)
-    logger.addHandler(handler)
-    
-    return logger
-            </code></pre>
-        </section>
+        <p>In industrial automation, hardware and software must operate in perfect synergy. When managing Industrial PCs (IPCs) on the factory floor, hardware degradation—such as the backup battery wearing out—can lead to catastrophic data loss during power cycles.</p>
+        
+        <p>To prevent this without disrupting the machine's primary control software, I developed <strong>Edge Sentinel</strong>: a lightweight Python daemon designed to run silently as a native Windows Service, monitoring battery health and system telemetry strictly in the background.</p>
 
-        <section>
-            <h2>Deployment: The Standalone Executable</h2>
-            <p>To avoid "dependency hell" on production machines, I packaged the entire Python application into a single, standalone executable (`.exe`) using PyInstaller. This ensures Edge Sentinel can be deployed via a simple file copy with zero setup time on the target IPC.</p>
-            <pre><code>pyinstaller --noconsole --onefile edge_sentinel.py</code></pre>
-        </section>
+        <h2>1. Architecture: The Native Windows Service</h2>
+        <p>Standard Python scripts are not suited for headless, persistent execution on Windows IPCs. They require open consoles and lack integration with the OS boot sequence. The architectural solution is to wrap the Python logic using <code>win32serviceutil</code>, turning the script into a true, native Windows Service.</p>
+        
+        <p>This ensures the monitor starts automatically with the machine, runs under the SYSTEM account, and listens gracefully to OS-level signals (like shutdown or stop commands) rather than relying on blunt task-killing.</p>
 
-        <section>
-            <h2>Download & Source</h2>
-            <!-- INSERISCI QUI IL LINK ALLA RELEASE QUANDO LA CREEREMO -->
-            <a href="LINK_ALLA_TUA_RELEASE_GITHUB" class="btn">Download Edge Sentinel v1.0 (.exe)</a>
-        </section>
-    </main>
+        <!-- CODE BLOCK CONCEPT -->
+        <pre><code><span class="code-comment"># --- WINDOWS SERVICE CLASS IMPLEMENTATION ---</span>
+<span class="code-keyword">import</span> win32serviceutil
+<span class="code-keyword">import</span> win32service
+<span class="code-keyword">import</span> win32event
+
+<span class="code-keyword">class</span> <span class="code-function">EdgeSentinelService</span>(win32serviceutil.ServiceFramework):
+    _svc_name_ = <span class="code-keyword">"EdgeSentinel"</span>
+    _svc_display_name_ = <span class="code-keyword">"Edge Sentinel Battery Monitor"</span>
+
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, args):
+        win32serviceutil.ServiceFramework.<span class="code-function">__init__</span>(self, args)
+        self.stop_event = win32event.<span class="code-function">CreateEvent</span>(<span class="code-keyword">None</span>, 0, 0, <span class="code-keyword">None</span>)
+
+    <span class="code-keyword">def</span> <span class="code-function">SvcStop</span>(self):
+        <span class="code-comment"># Receives the Stop command from Windows OS</span>
+        self.<span class="code-function">ReportServiceStatus</span>(win32service.SERVICE_STOP_PENDING)
+        win32event.<span class="code-function">SetEvent</span>(self.stop_event)
+
+    <span class="code-keyword">def</span> <span class="code-function">main</span>(self):
+        <span class="code-keyword">while True</span>:
+            <span class="code-comment"># Replaces time.sleep(). Waits 5000ms but interrupts
+            # immediately if Windows sends the Stop signal.</span>
+            rc = win32event.<span class="code-function">WaitForSingleObject</span>(self.stop_event, 5000)
+            <span class="code-keyword">if</span> rc == win32event.WAIT_OBJECT_0:
+                <span class="code-keyword">break</span>
+            
+            <span class="code-keyword">try</span>:
+                config = <span class="code-function">carica_configurazione</span>()
+                usura = <span class="code-function">calcola_usura</span>(config[<span class="code-keyword">"install_date"</span>], <span class="code-function">float</span>(config[<span class="code-keyword">"lifespan_years"</span>]))
+                stato = <span class="code-function">determina_stato</span>(usura)
+                <span class="code-function">salva_stato_ui</span>(usura, stato)
+            <span class="code-keyword">except Exception as</span> e:
+                logging.<span class="code-function">error</span>(f<span class="code-keyword">"Error reading or calculating: {e}"</span>)</code></pre>
+
+        <h2>2. UI Decoupling and State Management</h2>
+        <p>Because Edge Sentinel runs as a SYSTEM daemon, it cannot directly spawn GUI windows to warn operators. Instead, I employed a strict decoupling strategy.</p>
+        
+        <p>The daemon calculates the wear percentage based on installation dates and expected lifespan, categorizing the health into operational zones (OK, Warning, Imminent Replacement). It then writes this state to a lightweight JSON flag file (<code>ui_flag.json</code>). A separate, non-intrusive UI application can monitor this file and spawn a localized popup only when the <code>mostra_popup_allarme</code> boolean is true.</p>
+
+        <h2>3. Deployment: Taming Path Management in Standalone Executables</h2>
+        <p>Deploying Python in an industrial setting means bypassing "dependency hell". The entire service is packaged into a standalone <code>.exe</code> using PyInstaller. However, converting a script to an executable fundamentally changes how the OS resolves relative paths.</p>
+
+        <p>To ensure the service can reliably find its local <code>config.json</code> and generate logs accurately regardless of where the technician drops the file, I implemented dynamic path resolution:</p>
+
+        <pre><code><span class="code-comment"># --- ADVANCED PATH MANAGEMENT ---
+# When the program becomes a Service or .exe, the working dir changes.
+# This logic forces the program to resolve paths relative to the executable itself.</span>
+<span class="code-keyword">import</span> sys
+<span class="code-keyword">import</span> os
+
+<span class="code-keyword">if</span> <span class="code-function">getattr</span>(sys, <span class="code-keyword">'frozen'</span>, <span class="code-keyword">False</span>):
+    BASE_DIR = os.path.<span class="code-function">dirname</span>(sys.executable)
+<span class="code-keyword">else</span>:
+    BASE_DIR = os.path.<span class="code-function">dirname</span>(os.path.<span class="code-function">abspath</span>(__file__))
+
+os.<span class="code-function">chdir</span>(BASE_DIR)
+
+<span class="code-comment"># Create directories if they don't exist (crucial on first boot)</span>
+os.<span class="code-function">makedirs</span>(<span class="code-keyword">'logs'</span>, exist_ok=<span class="code-keyword">True</span>)
+os.<span class="code-function">makedirs</span>(<span class="code-keyword">'output'</span>, exist_ok=<span class="code-keyword">True</span>)</code></pre>
+
+        <h2>4. Zero-Friction Edge Integration</h2>
+        <p>The final result is a robust, zero-configuration executable. Maintenance personnel can deploy Edge Sentinel on any Windows IPC simply by dropping the file and running an install flag via command line, completely isolating the monitoring logic from the primary manufacturing software stack.</p>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
+    </footer>
+
 </body>
 </html>
