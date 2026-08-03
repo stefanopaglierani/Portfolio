@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Sentinel | Stefano Paglierani</title>
+    <!-- COPIA QUI LO STESSO BLOCCO <style> CHE HAI IN index.html -->
+    <style>
+        /* Placeholder per i tuoi stili custom */
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">&larr; Back to Portfolio</a>
+        <h1>Edge Sentinel</h1>
+        <p>A Python-Based Background Monitor for Industrial PCs</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>The Challenge: Silent Edge Monitoring</h2>
+            <p>In industrial automation, hardware and software must operate in perfect synergy. When working with Industrial PCs (IPCs) on the factory floor, having a reliable, non-intrusive way to monitor system health without disrupting primary control tasks is a strict requirement.</p>
+        </section>
+
+        <section>
+            <h2>Core Logic & Architecture</h2>
+            <p><strong>[ INCOLLA QUI L'INTRODUZIONE E I BULLET POINTS DEL TUO README ]</strong></p>
+        </section>
+
+        <section>
+            <h2>Robust Logging System</h2>
+            <p>When a system fails on the edge, logs are the only diagnostic tool. Here is a snippet of the logging architecture designed to run silently without filling up IPC storage:</p>
+            <pre><code>
+import logging
+import os
+from logging.handlers import RotatingFileHandler
+
+def setup_logger():
+    log_dir = "C:\\EdgeSentinel\\Logs"
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+        
+    log_file = os.path.join(log_dir, 'sentinel_monitor.log')
+    handler = RotatingFileHandler(log_file, maxBytes=5*1024*1024, backupCount=3)
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    
+    logger = logging.getLogger('EdgeSentinel')
+    logger.setLevel(logging.INFO)
+    logger.addHandler(handler)
+    
+    return logger
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Deployment: The Standalone Executable</h2>
+            <p>To avoid "dependency hell" on production machines, I packaged the entire Python application into a single, standalone executable (`.exe`) using PyInstaller. This ensures Edge Sentinel can be deployed via a simple file copy with zero setup time on the target IPC.</p>
+            <pre><code>pyinstaller --noconsole --onefile edge_sentinel.py</code></pre>
+        </section>
+
+        <section>
+            <h2>Download & Source</h2>
+            <!-- INSERISCI QUI IL LINK ALLA RELEASE QUANDO LA CREEREMO -->
+            <a href="LINK_ALLA_TUA_RELEASE_GITHUB" class="btn">Download Edge Sentinel v1.0 (.exe)</a>
+        </section>
+    </main>
+</body>
+</html>
