@@ -1,22 +1,23 @@
 # Stefano Paglierani | Technical Portfolio & Projects
 
-Welcome to my central repository. I am a Software Developer and Automation Specialist based in Italy, currently open to relocation to the United States (specifically Colorado). 
+Welcome to my central repository. I'm a software developer based in Italy, rebuilding hands-on programming skills with AI-assisted development, and actively seeking H-1B sponsorship to relocate to Northern Colorado.
 
-My work exists at the intersection of complex software logic, procedural generation, and real-world industrial mechanics. This repository serves as the source code for my personal technical portfolio and hosts documentation for my ongoing projects.
+This repository is the source code for my personal technical portfolio and hosts documentation for my ongoing projects.
 
 ## 🚀 Core Competencies
-* **Languages & Scripting:** Luau, HTML, CSS (expanding into full-stack integration).
-* **Systems Architecture:** Designing robust survival mechanics, gameplay loops, and dynamic state management in simulated environments.
-* **Industrial Automation:** CNC software architecture (Maestro Suite) and high-level hardware-software troubleshooting.
-* **AI Integration:** Leveraging LLMs for rapid debugging, code optimization, and workflow automation.
+* **Primary language:** Python (automation, background services, scripting).
+* **Also:** C++, Assembly, Pascal, Industrial Automation / PLC, Luau (OOP, Roblox Studio).
+* **Certifications:** Tecnico per l'Automazione Industriale, 800-hour program, CESCOT Italia (2015).
+* **AI-Assisted Development:** Pairing programming/debugging logic with AI coding tools to build working software fast.
 
 ## 📁 Featured Projects (Live on Website)
-1. **Mars Survival Simulation:** A complex, logic-driven environment built with Luau, featuring procedural generation, database management, and functional UI/UX.
-2. **Da Vinci Glamping Resort:** A smart-hospitality concept demonstrating hands-on hardware/software integration, clean energy infrastructure, and digital storefront management.
-3. **CNC & Automation Protocols:** Documentation and technical whitepapers on advanced manufacturing software diagnostics.
+1. **Edge Sentinel:** A personal Python project &mdash; a background daemon monitoring industrial-PC battery health, packaged as a native Windows Service.
+2. **Mars Survival Simulation:** A complex, logic-driven environment built with Luau, featuring procedural generation, database management, and functional UI/UX.
+3. **Industrial Automation Background:** How an 800-hour CESCOT automation certification and an operations role at an industrial CNC machinery manufacturer (SCM Group) shape my move into automation-adjacent software work.
+4. **Da Vinci Glamping Resort:** A self-funded, early-stage off-grid hospitality concept &mdash; concept design and social outreach so far, honestly labeled as not yet built out.
 
-## 📖 Technical Articles & Whitepapers
-*Coming Soon.* This section of the portfolio acts as an editorial hub discussing procedural programming techniques, cross-functional automation challenges, and bridging the gap between mechanical execution and software logic.
+## 📖 Technical Articles
+The tech blog covers Edge Sentinel's architecture, a conceptual offline-first AI assistant for motorcyclists, and server-side validation patterns in Luau.
 
 ---
-*For professional inquiries and full technical resume, please connect with me on [LinkedIn](INSERISCI_QUI_IL_TUO_LINK_LINKEDIN).*
+*For professional inquiries and full technical background, please connect with me on [LinkedIn](https://www.linkedin.com/in/stefano-paglierani-a4067a398/).*

@@ -199,9 +199,9 @@
 
     <div class="article-content">
         
-        <p>In industrial automation, hardware and software must operate in perfect synergy. When managing Industrial PCs (IPCs) on the factory floor, hardware degradation—such as the backup battery wearing out—can lead to catastrophic data loss during power cycles.</p>
-        
-        <p>To prevent this without disrupting the machine's primary control software, I developed <strong>Edge Sentinel</strong>: a lightweight Python daemon designed to run silently as a native Windows Service, monitoring battery health and system telemetry strictly in the background.</p>
+        <p>In industrial automation, hardware and software must operate in perfect synergy. On Industrial PCs (IPCs) used on factory floors, hardware degradation—such as the backup battery wearing out—can lead to data loss during power cycles.</p>
+
+        <p>As a personal project, I designed and built <strong>Edge Sentinel</strong> to address that problem: a lightweight Python daemon that runs silently as a native Windows Service, monitoring battery health and system telemetry strictly in the background, without interfering with a machine's primary control software.</p>
 
         <h2>1. Architecture: The Native Windows Service</h2>
         <p>Standard Python scripts are not suited for headless, persistent execution on Windows IPCs. They require open consoles and lack integration with the OS boot sequence. The architectural solution is to wrap the Python logic using <code>win32serviceutil</code>, turning the script into a true, native Windows Service.</p>
