@@ -11,7 +11,7 @@ This repository is the source code for my personal technical portfolio and hosts
 * **AI-Assisted Development:** Pairing programming/debugging logic with AI coding tools to build working software fast.
 
 ## 📁 Featured Projects (Live on Website)
-1. **Edge Sentinel:** A personal Python project &mdash; a background daemon monitoring industrial-PC battery health, packaged as a native Windows Service.
+1. **Edge Sentinel:** A personal Python project &mdash; a background daemon monitoring industrial-PC battery health, packaged as a native Windows Service. [Source code](https://github.com/stefanopaglierani/edge-sentinel).
 2. **Mars Survival Simulation:** A complex, logic-driven environment built with Luau, featuring procedural generation, database management, and functional UI/UX.
 3. **Industrial Automation Background:** How an 800-hour CESCOT automation certification and an operations role at an industrial CNC machinery manufacturer (SCM Group) shape my move into automation-adjacent software work.
 4. **Da Vinci Glamping Resort:** A self-funded, early-stage off-grid hospitality concept &mdash; concept design and social outreach so far, honestly labeled as not yet built out.
