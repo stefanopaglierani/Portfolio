@@ -1,247 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stefano Paglierani | Software Developer & Automation Specialist</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --card-bg: #1e293b;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        /* NAVBAR */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 20px 40px;
-            border-bottom: 1px solid #334155;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: var(--accent);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            max-width: 1000px;
-            margin: 100px auto;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 10px;
-            line-height: 1.1;
-        }
-
-        .hero h2 {
-            font-size: 28px;
-            color: var(--accent);
-            font-weight: 400;
-            margin-bottom: 30px;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin-bottom: 40px;
-        }
-
-        /* TECH STACK */
-        .tech-stack {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 50px;
-        }
-
-        .tech-tag {
-            background-color: var(--card-bg);
-            border: 1px solid #334155;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-family: monospace;
-            font-size: 14px;
-            color: var(--accent);
-        }
-
-        /* PROJECTS GRID */
-        .section-title {
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            padding: 0 20px;
-            font-size: 32px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
-
-        .projects {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px 100px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .project-card h3 {
-            font-size: 24px;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--accent);
-            padding: 10px 20px;
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background-color: var(--accent);
-            color: var(--bg-color);
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #334155;
-            color: var(--text-muted);
-            margin-top: 50px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stefano Paglierani — product builder, AI-directed software, industrial automation</title>
+<meta name="description" content="Portfolio of Stefano Paglierani: a mobile racing game, a parkour school app, a self-running YouTube channel and a Godot terrain generator, built as product owner directing AI coding agents.">
+<meta property="og:title" content="Stefano Paglierani — product builder, AI-directed software, industrial automation">
+<meta property="og:description" content="Portfolio of Stefano Paglierani: a mobile racing game, a parkour school app, a self-running YouTube channel and a Godot terrain generator, built as product owner directing AI coding agents.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/nitro/v0.21-costa.jpg">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
 
-    <header>
-        <nav>
-            <div class="logo">S.<span>Paglierani</span></div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="articles.html">Tech Blog</a>
-            </div>
-        </nav>
-    </header>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="wide">Ideas in, working software out.</h1>
+      <p class="lead">I'm Stefano Paglierani. I trained as an industrial automation technician, and today I build software as product owner and technical lead, directing AI coding agents from the first brief to the release. Since September that has produced a mobile racing game, the app of a 400-member parkour school, a self-running YouTube channel and a terrain generator for Godot.</p>
+      <div class="actions">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn" href="resume.html">Read my résumé</a>
+      </div>
+      <p class="status-line">Based in Italy, relocating to Northern Colorado. EU citizen seeking H-1B sponsorship.</p>
+    </div>
+    <aside class="log" aria-labelledby="log-title">
+      <div class="log-title"><h2 id="log-title">Production log</h2><span>2026, newest first</span></div>
+      <ol>
+<li><time datetime="2026-11-08">Nov 8</time><span class="what"><b><a href="project-nitro-underground.html">Nitro Underground</a> v0.21</b>: 51 new environment models. The 26th playable build in 13 days.</span></li>
+<li><time datetime="2026-11-06">Nov 6</time><span class="what"><b><a href="project-universal-game-tools.html">Universal Game Tools</a></b>: terrain generator 0.1.0, from empty repository to tested release in one day.</span></li>
+<li><time datetime="2026-11-01">Nov 1</time><span class="what"><b><a href="project-cozy-ambience.html">Cozy Ambience</a></b>: release calendar automated. New videos every Tuesday, Thursday and Saturday.</span></li>
+<li><time datetime="2026-10-27">Oct 27</time><span class="what"><b>Nitro Underground</b>: from concept to a first playable build on an Android phone.</span></li>
+<li><time datetime="2026-10-26">Oct 26</time><span class="what"><b><a href="project-xplore-parkour.html">XPLORE Parkour</a></b>: beta 0.9 of the members app and website published.</span></li>
+<li><time datetime="2026-10-17">Oct 17</time><span class="what"><b>Cozy Ambience</b>: zero-cost video pipeline goes live on GitHub Actions.</span></li>
+<li><time datetime="2026-09">Sep</time><span class="what"><b>XPLORE Parkour</b>: product defined with the gym, work starts.</span></li>
+<li><time datetime="2026-09-06">Sep 6</time><span class="what"><b><a href="project-edge-sentinel.html">Edge Sentinel</a></b>: battery monitor for industrial PCs published as a Windows service.</span></li>
+      </ol>
+    </aside>
+  </div>
+</section>
 
-    <section class="hero">
-        <h1>Bridging Software Logic <br>and Industrial Mechanics.</h1>
-        <h2>Software Developer & Automation Specialist</h2>
-        <p>Software developer rebuilding hands-on programming skills with AI-assisted development. EU citizen based in Italy, actively seeking H-1B sponsorship to relocate to Northern Colorado.</p>
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p>Every project here is public on GitHub, with its full history, tests and documentation.</p>
+    </div>
+    <div class="work">
+<article class="work-item">
+  <div class="work-media">
+    <a href="project-nitro-underground.html" tabindex="-1" aria-hidden="true"><img src="assets/img/nitro/v0.21-costa.jpg" alt="Nitro Underground v0.21: coastal road with palm trees, hills and white houses" width="1280" height="720"></a>
+    <img src="assets/img/nitro/v0.20.4-dealer.jpg" alt="The dealer screen with a green coupé on a turntable" width="1280" height="720" loading="lazy" class="inset">
+  </div>
+  <div class="work-text">
+    <h3><a href="project-nitro-underground.html">Nitro Underground</a></h3>
+    <p class="kind">A 3D street-racing game for Android, built in Godot.</p>
+    <ul class="facts"><li>26 playable versions in 13 days, each one tested on a phone or PC before the next.</li><li>Car physics written from scratch and checked by an automated test bench: 0&ndash;100 km/h in 3.5 s, jumps within 2.5% of the ideal ballistic path.</li><li>Circuits are plain-text maps (<code>DRITTO 520</code>, <code>TORNANTE DESTRA</code>) that the game turns into road, terrain and AI racing lines.</li></ul>
+    <p class="stack">Godot 4.7, GDScript, Jolt physics, Android (OpenGL ES), about 7,500 lines</p>
+    <div class="links"><a href="project-nitro-underground.html">Read the case study</a><a href="https://github.com/stefanopaglierani/nitro-underground">Source on GitHub</a></div>
+  </div>
+</article>
+<article class="work-item">
+  <div class="work-media">
+    <a href="project-xplore-parkour.html" tabindex="-1" aria-hidden="true"><img src="assets/img/xplore/site-hero.jpg" alt="XPLORE Parkour website: 'A ogni eroe la sua avventura' over a parkour training video" width="1440" height="900" loading="lazy"></a>
+    <img src="assets/img/xplore/app-screens-left.jpg" alt="Three app screens: sign-in, community feed and the weekly class timetable" width="1000" height="723" loading="lazy" class="inset">
+  </div>
+  <div class="work-text">
+    <h3><a href="project-xplore-parkour.html">XPLORE Parkour</a></h3>
+    <p class="kind">Members app and website for a real parkour school with about 400 members.</p>
+    <ul class="facts"><li>One rules engine runs on the server, inside the browser and in the tests: 60 endpoints, 18 tables, 94 automated checks.</li><li>Class booking, memberships paid in instalments, Italian tax receipts as PDF, a community feed and a staff roll call.</li><li>Design, accessibility and security reviews before the beta. One privilege-escalation bug found, fixed and now covered by tests.</li></ul>
+    <p class="stack">React 19, Vite, Node.js with SQLite, sql.js, jsPDF</p>
+    <div class="links"><a href="project-xplore-parkour.html">Read the case study</a><a href="https://github.com/stefanopaglierani/xplore-parkour-app">Source on GitHub</a></div>
+  </div>
+</article>
+<article class="work-item">
+  <div class="work-media">
+    <a href="project-cozy-ambience.html" tabindex="-1" aria-hidden="true"><img src="assets/img/cozy/fjord-porch-rain.jpg" alt="A wooden porch above a Norwegian fjord in the rain, with a lantern and a blanket" width="1376" height="768" loading="lazy"></a>
+    <img src="assets/img/cozy/zermatt-snow-porch.jpg" alt="A snowy porch facing the Matterhorn, with a blanket and snowshoes" width="1376" height="768" loading="lazy" class="inset">
+  </div>
+  <div class="work-text">
+    <h3><a href="project-cozy-ambience.html">Cozy Ambience</a></h3>
+    <p class="kind">A YouTube channel that renders and uploads its own videos.</p>
+    <ul class="facts"><li>A Python pipeline turns one still image into a seamless 20-second animated loop: rain, snow, fog, flowing water, steam, all placed behind or in front of objects using a depth map.</li><li>Ambient sound in layers of 97, 131, 173 and 229 seconds, so the mix never repeats in a 45-minute video.</li><li>GitHub Actions renders and uploads three times a week, with the PC switched off. 18 scenes uploaded so far, running cost zero.</li></ul>
+    <p class="stack">Python, NumPy, Pillow, ffmpeg, Depth Anything V2, YouTube Data API, GitHub Actions</p>
+    <div class="links"><a href="project-cozy-ambience.html">Read the case study</a><a href="https://www.youtube.com/@relaxing-video-b1k">Watch on YouTube</a><a href="https://github.com/stefanopaglierani/cozy-ambience">Source on GitHub</a></div>
+  </div>
+</article>
+<article class="work-item">
+  <div class="work-media">
+    <a href="project-universal-game-tools.html" tabindex="-1" aria-hidden="true"><img src="assets/img/ugt/uptg_12345_solid.jpg" alt="A generated island with sandy coast, green slopes and a rocky peak, seed 12345" width="1200" height="675" loading="lazy"></a>
+    <img src="assets/img/ugt/uptg_12345_wire.jpg" alt="The same island in wireframe, showing the triangle grid" width="1200" height="675" loading="lazy" class="inset">
+  </div>
+  <div class="work-text">
+    <h3><a href="project-universal-game-tools.html">Universal Game Tools</a></h3>
+    <p class="kind">Reusable tools for any Godot game. The first one generates islands.</p>
+    <ul class="facts"><li>Architecture first: a written specification and six decision records before the first line of code.</li><li>Deterministic: the same seed always produces the same island, verified by checksums in the tests.</li><li>A 256 &times; 256 island (131,072 triangles) with collision in about half a second on a laptop GPU.</li></ul>
+    <p class="stack">Godot 4.7.2, GDScript, headless test runner, Godot Physics and Jolt</p>
+    <div class="links"><a href="project-universal-game-tools.html">Read the case study</a><a href="https://github.com/stefanopaglierani/universal-game-tools">Source on GitHub</a></div>
+  </div>
+</article>
+    </div>
+  </div>
+</section>
 
-        <div class="tech-stack">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">C++</span>
-            <span class="tech-tag">Industrial Automation (PLC)</span>
-            <span class="tech-tag">Systems Architecture</span>
-            <span class="tech-tag">AI-Assisted Development</span>
-            <span class="tech-tag">Luau / Roblox Studio</span>
-        </div>
-    </section>
+<section class="section" id="more">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Automation and earlier projects</h2>
+      <p>Where the engineering habits come from.</p>
+    </div>
+    <div class="register">
+      <article>
+        <p class="meta">Python, Windows services &middot; 2026</p>
+        <h3><a href="project-edge-sentinel.html">Edge Sentinel</a></h3>
+        <p>A background service for industrial PCs that tracks the wear of the backup battery and raises a flag before a power cycle can wipe the machine's settings.</p>
+      </article>
+      <article>
+        <p class="meta">PLC, manufacturing &middot; 2015 to today</p>
+        <h3><a href="project-cnc.html">Industrial automation background</a></h3>
+        <p>An 800-hour Industrial Automation Technician certification, and daily work inside SCM Group, a manufacturer of CNC and woodworking machinery.</p>
+      </article>
+      <article>
+        <p class="meta">Luau, Roblox Studio &middot; 2026</p>
+        <h3><a href="project-mars.html">Mars Survival Simulation</a></h3>
+        <p>Survival loops, procedural spawning and a server-validated building system, written in object-oriented Luau.</p>
+      </article>
+      <article>
+        <p class="meta">Concept stage &middot; since 2023</p>
+        <h3><a href="project-integration.html">Da Vinci Glamping Resort</a></h3>
+        <p>A self-funded off-grid hospitality concept that pairs clean energy with smart-home automation. Still a design, and labelled as one.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <h2 class="section-title" id="projects">Featured Engineering & Development</h2>
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How I work</h2>
+      <p>I own the product, the decisions and the testing. Claude, Anthropic's AI, writes most of the code under my direction, and every repository says so.</p>
+    </div>
+    <ol class="process">
+      <li><h3>Define it with the people who use it</h3><p>The XPLORE app was defined together with the gym that uses it; Nitro Underground is play-tested on my own phone after every build.</p></li>
+      <li><h3>Write the rules down</h3><p>Briefs, project instructions and decision records come first, so every session builds on the same agreements.</p></li>
+      <li><h3>Ship small, test on the real device</h3><p>Short versions, each tried on the phone or PC it targets. Feedback from one build becomes the brief for the next.</p></li>
+      <li><h3>Review before it goes out</h3><p>Design, accessibility, security and licence checks. Every third-party asset is logged with author, link and licence.</p></li>
+    </ol>
+  </div>
+</section>
 
-    <section class="projects">
+<section class="section" id="background">
+  <div class="wrap split">
+    <h2>Background</h2>
+    <div>
+      <p>I studied computer science at ITIS Blaise Pascal in Cesena, qualifying as a <i>perito informatico</i> with a software-programming specialization. In 2015 I completed an 800-hour Industrial Automation Technician program with CESCOT Italia, focused on PLCs.</p>
+      <p>Since 2023 I have worked in operations at SCM Group, a leading Italian manufacturer of industrial CNC and woodworking machinery. Being on a real manufacturing floor every day is why I care about software that runs unattended, fails safely and makes sense to the people using it.</p>
+      <p>I'm now moving into product and software roles full time, and relocating with my family to Northern Colorado.</p>
+      <div class="actions"><a class="btn" href="resume.html">Read the full résumé</a></div>
+    </div>
+  </div>
+</section>
 
-        <!-- PROJECT 1: EDGE SENTINEL -->
-        <div class="project-card">
-            <h3>Edge Sentinel</h3>
-            <p>A personal Python project: a lightweight background daemon that monitors industrial-PC battery health and reports state via a native Windows Service, packaged as a standalone executable.</p>
-            <a href="project-edge-sentinel.html" class="btn">Read Case Study</a>
-        </div>
+<section class="section" id="writing">
+  <div class="wrap split">
+    <h2>Writing</h2>
+    <ul class="writing">
+      <li><a href="project-edge-sentinel.html">Edge Sentinel: background monitoring for industrial PCs</a><span>Python, Windows</span><p>Running Python as a native Windows service, decoupling alerts from the UI, and paths that survive PyInstaller.</p></li>
+      <li><a href="article-motorcycle-ai.html">An offline-first voice assistant for motorcyclists</a><span>Concept, mobile, edge AI</span><p>On-device language models, foreground services, audio ducking and map matching without a network.</p></li>
+      <li><a href="article-luau-architecture.html">Server-side validation in procedural worlds</a><span>Luau</span><p>A dictionary-driven building system that never trusts the client.</p></li>
+    </ul>
+  </div>
+</section>
 
-        <!-- PROJECT 2: MARS -->
-        <div class="project-card">
-            <h3>Mars Survival Simulation</h3>
-            <p>A complex, logic-driven environment engineered entirely in Luau. Features include procedural generation, real-time resource tracking, state management, and custom functional UI elements built from scratch.</p>
-            <a href="project-mars.html" class="btn">View Technical Details</a>
-        </div>
-
-        <!-- PROJECT 3: INDUSTRIAL AUTOMATION BACKGROUND -->
-        <div class="project-card">
-            <h3>Industrial Automation Background</h3>
-            <p>Certified Industrial Automation Technician (800-hour program, CESCOT Italia), currently working in operations at SCM Group, a manufacturer of industrial CNC and woodworking machinery &mdash; the foundation for my move into automation-adjacent software work.</p>
-            <a href="project-cnc.html" class="btn">Read More</a>
-        </div>
-
-        <!-- PROJECT 4: DA VINCI GLAMPING -->
-        <div class="project-card">
-            <h3>Da Vinci Glamping Resort</h3>
-            <p>Founder of a self-funded, early-stage off-grid hospitality concept: clean energy and smart-home automation design, validated through a social media outreach effort ahead of a planned crowdfunding campaign.</p>
-            <a href="project-integration.html" class="btn">Read More</a>
-        </div>
-
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
-    </footer>
-
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XPLORE Parkour app — case study | Stefano Paglierani</title>
+<meta name="description" content="Members app and website for a 400-member parkour school: bookings, memberships in instalments, Italian tax receipts, community and challenges, on one rules engine that runs on server, browser and tests.">
+<meta property="og:title" content="XPLORE Parkour app — case study | Stefano Paglierani">
+<meta property="og:description" content="Members app and website for a 400-member parkour school: bookings, memberships in instalments, Italian tax receipts, community and challenges, on one rules engine that runs on server, browser and tests.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/xplore/app-overview.jpg">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work" aria-current="page">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="index.html#work">Work</a> / XPLORE Parkour</p>
+  <div class="case-head">
+    <div>
+      <h1 class="wide">XPLORE Parkour app</h1>
+      <p class="lead">A mobile-first web app for the members and staff of XPLORE Parkour, a parkour school with about 400 members in Rimini and Pesaro, Italy, plus its public website. App and site share one account, one rules engine and one database.</p>
+      <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/xplore-parkour-app">Source on GitHub</a><a class="btn" href="https://github.com/stefanopaglierani/xplore-parkour-app#try-it-in-two-minutes">Run the demo locally</a></div>
+    </div>
+    <div class="plate"><dl><dt>Role</dt><dd>Product owner and technical lead: product definition with the gym, design and architecture decisions, testing, reviews</dd><dt>Built with</dt><dd>React 19, Vite 8, Node.js with node:sqlite, sql.js, jsPDF, oxlint</dd><dt>Timeline</dt><dd>About four weeks, September to October 2026</dd><dt>Status</dt><dd>Beta 0.9</dd><dt>Scale</dt><dd>60 endpoints, 18 tables, 94 automated checks on the business rules</dd></dl></div>
+  </div>
+</div><div class="wrap"><figure class="case-hero"><img src="assets/img/xplore/app-overview.jpg" alt="Six app screens side by side: sign-in, feed, weekly classes, Level Up challenges, memberships with receipts, staff roll call" width="1600" height="578" loading="lazy"><figcaption>The member and staff app. From left: sign-in, community feed, weekly classes, Level Up challenges, memberships and receipts, staff roll call.</figcaption></figure></div><div class="wrap"><section class="case-body">
+  <h2>The brief</h2>
+  <div>
+
+<p class="lead">A real school, real members, real money: bookings, memberships paid in instalments and the tax receipts Italian parents need for the sports-expense deduction.</p>
+<p>I defined the product together with the gym, and the beta covers what members and staff do every week.</p>
+<h3>For members</h3>
+<ul class="facts">
+<li>Weekly timetable per site with live free spots; book and cancel within the weekly quota of the plan.</li>
+<li>Memberships by season, paid in 1, 3, 6 or 12 instalments, with a 10-day grace period before an account is blocked.</li>
+<li>An automatic tax receipt for every payment, with the data required by Italian law for 5&ndash;18 year olds, generated as a PDF on the device.</li>
+<li>A community feed, unlocked after an introduction approved by staff, and private messages with request, accept and block.</li>
+<li><b>Level Up</b>: the gym's paper booklet of 36 challenges made digital; a new badge flashes until it's opened.</li>
+<li>Italian and English, and sign-in to the website by scanning a QR code with the app.</li>
+</ul>
+<h3>For staff</h3>
+<ul class="facts">
+<li>Roll call with present and absent, approvals and member search.</li>
+<li>Managers activate memberships, register payments at the desk, extend due dates, change roles and suspend accounts.</li>
+<li>Coaches can award a challenge only on a day the member actually booked, and leave a note the member can read.</li>
+<li>Every role is limited to its own site: a Pesaro coach never sees Rimini's members.</li>
+</ul>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>One engine, three places</h2>
+  <div>
+
+<p>The key architectural decision: <b>the rules engine is written once and runs everywhere.</b> It receives its database, crypto functions and clock from outside, so the same code runs:</p>
+<div class="flow">
+  <div><b>On the server</b><span>SQLite on disk, Node's crypto</span></div>
+  <div><b>In the browser</b><span>sql.js, for a full demo that needs no server</span></div>
+  <div><b>In the tests</b><span>In-memory database and a fake clock that jumps weeks ahead</span></div>
+</div>
+<p>The fake clock is what makes overdue instalments and account blocks testable in milliseconds instead of waiting ten days. The interface never decides anything that matters: it asks the engine, and the engine always checks ownership, role and site. Prices are computed on the server.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>The website</h2>
+  <div>
+
+<p>One long page whose background is a film of the gym: the video moves forward and backward as you scroll. It shares the timetable, events and Level Up with the app, and the same account.</p>
+<div class="gallery three">
+  <figure class=""><img src="assets/img/xplore/site-hero.jpg" alt="Website hero: 'A ogni eroe la sua avventura' over a training video" width="1440" height="900" loading="lazy"><figcaption>Hero over the scroll-driven film.</figcaption></figure>
+  <figure class=""><img src="assets/img/xplore/site-levelup.jpg" alt="Website section showing the Level Up challenge booklet" width="1440" height="900" loading="lazy"><figcaption>Level Up, the challenge booklet.</figcaption></figure>
+  <figure class=""><img src="assets/img/xplore/site-schedule.jpg" alt="Website weekly timetable with classes per day" width="1440" height="900" loading="lazy"><figcaption>The weekly timetable, live.</figcaption></figure>
+</div>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Reviewed before beta</h2>
+  <div>
+
+<p>Before presenting the beta I ran dedicated design, accessibility and security reviews, and tested every flow on desktop, phone and tablet.</p>
+<ul class="facts">
+<li>Passwords stored as scrypt hashes with a random salt and checked in constant time; session tokens stored only as SHA-256 hashes.</li>
+<li>All SQL uses bound parameters; uploads of SVG files are rejected; no cookies, so no cross-site request forgery surface.</li>
+<li>Sessions are revoked on password change, password reset and suspension.</li>
+<li>The security review found a real privilege-escalation bug (a site manager could reset the head office password). It was fixed and is now covered by a test.</li>
+</ul>
+<div class="callout"><p><b>Honest status.</b> Not production-ready yet: online payments are simulated, login has no rate limiting, and there is no production server. Those are the first items on the roadmap, followed by store apps with push notifications.</p></div>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Try it</h2>
+  <div>
+
+<p>The repository includes a demo with 11 accounts, from a member with an overdue instalment to the head office. Open the app in two browsers with different accounts and watch a coach award a challenge while the member's badge turns gold.</p>
+<pre class="code"><code>git clone https://github.com/stefanopaglierani/xplore-parkour-app.git
+cd xplore-parkour-app
+npm install
+npm run dev:demo</code></pre>
+<p class="small muted">XPLORE Parkour's name, logo, photos, videos and booklet belong to XPLORE Parkour and are used with permission.</p>
+
+  </div>
+</section></div><div class="wrap"><nav class="next" aria-label="Projects"><a href="project-nitro-underground.html">Previous: Nitro Underground</a><a href="project-cozy-ambience.html">Next: Cozy Ambience</a></nav></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

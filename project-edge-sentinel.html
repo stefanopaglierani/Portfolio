@@ -1,285 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge Sentinel: Python Background Monitor | Stefano Paglierani</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --code-bg: #0b1120;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
-        }
-
-        /* NAVBAR */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 20px 40px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: var(--accent);
-        }
-
-        /* ARTICLE HEADER */
-        .article-header {
-            max-width: 800px;
-            margin: 60px auto 40px auto;
-            padding: 0 20px;
-        }
-
-        .article-tag {
-            color: var(--accent);
-            font-family: monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .article-header h1 {
-            font-size: 42px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .article-meta {
-            color: var(--text-muted);
-            font-size: 14px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ARTICLE CONTENT */
-        .article-content {
-            max-width: 800px;
-            margin: 0 auto 80px auto;
-            padding: 0 20px;
-            color: #cbd5e1;
-        }
-
-        .article-content h2 {
-            color: var(--text-main);
-            font-size: 28px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-        }
-
-        .article-content h3 {
-            color: var(--accent);
-            font-size: 22px;
-            margin-top: 40px;
-            margin-bottom: 15px;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-        }
-        
-        .article-content ul {
-            margin-bottom: 20px;
-            padding-left: 20px;
-        }
-        
-        .article-content li {
-            margin-bottom: 10px;
-        }
-
-        /* CODE BLOCK STYLING */
-        pre {
-            background-color: var(--code-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 30px 0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        code {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            color: #6ee7b7;
-        }
-        
-        .code-comment {
-            color: #64748b;
-            font-style: italic;
-        }
-
-        .code-keyword {
-            color: #c084fc;
-        }
-        
-        .code-function {
-            color: #fcd34d;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edge Sentinel — case study | Stefano Paglierani</title>
+<meta name="description" content="A Python Windows service that monitors the backup battery of industrial PCs and raises an alarm flag before failure, packaged with PyInstaller for zero-dependency deployment.">
+<meta property="og:title" content="Edge Sentinel — case study | Stefano Paglierani">
+<meta property="og:description" content="A Python Windows service that monitors the backup battery of industrial PCs and raises an alarm flag before failure, packaged with PyInstaller for zero-dependency deployment.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-
-    <header>
-        <nav>
-            <div class="logo">S.<span>Paglierani</span></div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="articles.html">Tech Blog</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="article-header">
-        <span class="article-tag">Python / Edge Computing</span>
-        <h1>Edge Sentinel: Background Monitoring for Industrial PCs</h1>
-        <div class="article-meta">
-            <span>By Stefano Paglierani</span>
-            <span>•</span>
-            <span>Est. Read: 5 mins</span>
-            <span>•</span>
-            <span>Industrial Automation</span>
-            <span>•</span>
-            <span><a href="https://github.com/stefanopaglierani/edge-sentinel" style="color: var(--accent);">View Source Code &rarr;</a></span>
-        </div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work" aria-current="page">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="index.html#work">Work</a> / Edge Sentinel</p>
+  <div class="case-head">
+    <div>
+      <h1 class="wide">Edge Sentinel</h1>
+      <p class="lead">A lightweight Python service for industrial PCs that tracks the wear of the CMOS backup battery and raises a flag before it fails, so a routine power cycle on the factory floor doesn't turn into a hard reset and lost settings.</p>
+      <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/Edge-sentinel">Source on GitHub</a></div>
     </div>
+    <div class="plate"><dl><dt>Role</dt><dd>Problem, design, implementation and packaging; a personal project</dd><dt>Built with</dt><dd>Python, pywin32 (Windows Service API), PyInstaller</dd><dt>Published</dt><dd>6 September 2026</dd><dt>Status</dt><dd>Working personal project, not deployed in production</dd><dt>Licence</dt><dd>MIT</dd></dl></div>
+  </div>
+</div><div class="wrap"><section class="case-body">
+  <h2>The problem</h2>
+  <div>
 
-    <div class="article-content">
-        
-        <p>In industrial automation, hardware and software must operate in perfect synergy. On Industrial PCs (IPCs) used on factory floors, hardware degradation—such as the backup battery wearing out—can lead to data loss during power cycles.</p>
+<p class="lead">On a factory floor, industrial PCs run machines for years. The small battery that keeps their clock and settings alive wears out quietly.</p>
+<p>Nobody notices until the day the machine is switched off for maintenance and comes back with a reset clock and lost configuration. There is usually no early warning for the technician. I had seen that happen, and wanted a tool that warns weeks before, without touching the machine's own control software.</p>
 
-        <p>As a personal project, I designed and built <strong>Edge Sentinel</strong> to address that problem: a lightweight Python daemon that runs silently as a native Windows Service, monitoring battery health and system telemetry strictly in the background, without interfering with a machine's primary control software.</p>
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>How it works</h2>
+  <div>
 
-        <h2>1. Architecture: The Native Windows Service</h2>
-        <p>Standard Python scripts are not suited for headless, persistent execution on Windows IPCs. They require open consoles and lack integration with the OS boot sequence. The architectural solution is to wrap the Python logic using <code>win32serviceutil</code>, turning the script into a true, native Windows Service.</p>
-        
-        <p>This ensures the monitor starts automatically with the machine, runs under the SYSTEM account, and listens gracefully to OS-level signals (like shutdown or stop commands) rather than relying on blunt task-killing.</p>
+<div class="flow">
+  <div><b>config.json</b><span>Installation date and expected lifespan in years</span></div>
+  <div><b>Windows service</b><span>Wakes every 5 seconds, computes wear as a percentage</span></div>
+  <div><b>ui_flag.json</b><span>Status, wear and whether to show an alarm</span></div>
+  <div><b>Any UI</b><span>Watches the file and shows a popup only when needed</span></div>
+</div>
+<table class="numbers">
+<tbody>
+<tr><th>Green, OK</th><td>Below 80% of the expected lifespan</td></tr>
+<tr><th>Yellow, attention</th><td>80% to 95%: plan the replacement</td></tr>
+<tr><th>Red, replace now</th><td>95% and above: the alarm flag turns on</td></tr>
+</tbody></table>
+<p>Every start, stop and check is written to a timestamped log, <code>logs/battery_health.log</code>. A missing or corrupted configuration file never crashes the service: the error is logged and the next check tries again.</p>
 
-        <!-- CODE BLOCK CONCEPT -->
-        <pre><code><span class="code-comment"># --- WINDOWS SERVICE CLASS IMPLEMENTATION ---</span>
-<span class="code-keyword">import</span> win32serviceutil
-<span class="code-keyword">import</span> win32service
-<span class="code-keyword">import</span> win32event
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Decisions that matter</h2>
+  <div>
 
-<span class="code-keyword">class</span> <span class="code-function">EdgeSentinelService</span>(win32serviceutil.ServiceFramework):
-    _svc_name_ = <span class="code-keyword">"EdgeSentinel"</span>
-    _svc_display_name_ = <span class="code-keyword">"Edge Sentinel Battery Monitor"</span>
+<h3>A real Windows service, not a script in a console</h3>
+<p>A plain Python script needs an open console and a logged-in user, and it can be closed by accident. Wrapping the logic with <code>win32serviceutil</code> makes it a native service: it starts with the machine, runs without anyone logged in, and stops cleanly when Windows asks instead of being killed.</p>
+<pre class="code"><code><span class="k">class</span> EdgeSentinelService(win32serviceutil.ServiceFramework):
+    _svc_name_ = <span class="s">"EdgeSentinel"</span>
+    _svc_display_name_ = <span class="s">"Edge Sentinel Battery Monitor"</span>
 
-    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, args):
-        win32serviceutil.ServiceFramework.<span class="code-function">__init__</span>(self, args)
-        self.stop_event = win32event.<span class="code-function">CreateEvent</span>(<span class="code-keyword">None</span>, 0, 0, <span class="code-keyword">None</span>)
+    <span class="k">def</span> SvcStop(self):
+        <span class="c"># Windows asks the service to stop</span>
+        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
+        win32event.SetEvent(self.stop_event)
 
-    <span class="code-keyword">def</span> <span class="code-function">SvcStop</span>(self):
-        <span class="code-comment"># Receives the Stop command from Windows OS</span>
-        self.<span class="code-function">ReportServiceStatus</span>(win32service.SERVICE_STOP_PENDING)
-        win32event.<span class="code-function">SetEvent</span>(self.stop_event)
+    <span class="k">def</span> main(self):
+        <span class="k">while</span> True:
+            <span class="c"># Instead of time.sleep(): wait 5 s, but wake up at once on a stop signal</span>
+            rc = win32event.WaitForSingleObject(self.stop_event, 5000)
+            <span class="k">if</span> rc == win32event.WAIT_OBJECT_0:
+                <span class="k">break</span>
+            <span class="k">try</span>:
+                config = carica_configurazione()
+                usura = calcola_usura(config[<span class="s">"install_date"</span>], float(config[<span class="s">"lifespan_years"</span>]))
+                salva_stato_ui(usura, determina_stato(usura))
+            <span class="k">except</span> Exception <span class="k">as</span> e:
+                logging.error(f<span class="s">"Error reading or calculating: {e}"</span>)</code></pre>
+<p>Waiting on the stop event instead of sleeping is the detail that makes the service shut down in milliseconds instead of hanging for up to five seconds.</p>
 
-    <span class="code-keyword">def</span> <span class="code-function">main</span>(self):
-        <span class="code-keyword">while True</span>:
-            <span class="code-comment"># Replaces time.sleep(). Waits 5000ms but interrupts
-            # immediately if Windows sends the Stop signal.</span>
-            rc = win32event.<span class="code-function">WaitForSingleObject</span>(self.stop_event, 5000)
-            <span class="code-keyword">if</span> rc == win32event.WAIT_OBJECT_0:
-                <span class="code-keyword">break</span>
-            
-            <span class="code-keyword">try</span>:
-                config = <span class="code-function">carica_configurazione</span>()
-                usura = <span class="code-function">calcola_usura</span>(config[<span class="code-keyword">"install_date"</span>], <span class="code-function">float</span>(config[<span class="code-keyword">"lifespan_years"</span>]))
-                stato = <span class="code-function">determina_stato</span>(usura)
-                <span class="code-function">salva_stato_ui</span>(usura, stato)
-            <span class="code-keyword">except Exception as</span> e:
-                logging.<span class="code-function">error</span>(f<span class="code-keyword">"Error reading or calculating: {e}"</span>)</code></pre>
+<h3>Never interrupt the machine's software</h3>
+<p>A service running as SYSTEM can't open windows on the operator's screen, and it shouldn't. So Edge Sentinel only writes a small JSON file. A separate interface can watch that file and show a popup only when <code>mostra_popup_allarme</code> is true. The monitoring logic and the machine's control software never share a process.</p>
 
-        <h2>2. UI Decoupling and State Management</h2>
-        <p>Because Edge Sentinel runs as a SYSTEM daemon, it cannot directly spawn GUI windows to warn operators. Instead, I employed a strict decoupling strategy.</p>
-        
-        <p>The daemon calculates the wear percentage based on installation dates and expected lifespan, categorizing the health into operational zones (OK, Warning, Imminent Replacement). It then writes this state to a lightweight JSON flag file (<code>ui_flag.json</code>). A separate, non-intrusive UI application can monitor this file and spawn a localized popup only when the <code>mostra_popup_allarme</code> boolean is true.</p>
+<h3>Paths that survive packaging</h3>
+<p>The service ships as a single executable built with PyInstaller, so the target machine doesn't need Python. A frozen executable resolves relative paths from a different working folder, so the service anchors everything to its own location and creates its folders on the first run:</p>
+<pre class="code"><code><span class="k">if</span> getattr(sys, <span class="s">'frozen'</span>, False):
+    BASE_DIR = os.path.dirname(sys.executable)
+<span class="k">else</span>:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.chdir(BASE_DIR)
 
-        <h2>3. Deployment: Taming Path Management in Standalone Executables</h2>
-        <p>Deploying Python in an industrial setting means bypassing "dependency hell". The entire service is packaged into a standalone <code>.exe</code> using PyInstaller. However, converting a script to an executable fundamentally changes how the OS resolves relative paths.</p>
+os.makedirs(<span class="s">'logs'</span>, exist_ok=True)
+os.makedirs(<span class="s">'output'</span>, exist_ok=True)</code></pre>
 
-        <p>To ensure the service can reliably find its local <code>config.json</code> and generate logs accurately regardless of where the technician drops the file, I implemented dynamic path resolution:</p>
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Install</h2>
+  <div>
 
-        <pre><code><span class="code-comment"># --- ADVANCED PATH MANAGEMENT ---
-# When the program becomes a Service or .exe, the working dir changes.
-# This logic forces the program to resolve paths relative to the executable itself.</span>
-<span class="code-keyword">import</span> sys
-<span class="code-keyword">import</span> os
+<p>A technician copies the executable and <code>config.json</code> into one folder and runs two commands from an administrator prompt:</p>
+<pre class="code"><code>edge_sentinel_svc.exe install
+edge_sentinel_svc.exe start</code></pre>
+<p>It's a small project and an honest one: not running in a factory today, but a complete example of the unattended, fail-safe software I want to keep building for manufacturing.</p>
 
-<span class="code-keyword">if</span> <span class="code-function">getattr</span>(sys, <span class="code-keyword">'frozen'</span>, <span class="code-keyword">False</span>):
-    BASE_DIR = os.path.<span class="code-function">dirname</span>(sys.executable)
-<span class="code-keyword">else</span>:
-    BASE_DIR = os.path.<span class="code-function">dirname</span>(os.path.<span class="code-function">abspath</span>(__file__))
-
-os.<span class="code-function">chdir</span>(BASE_DIR)
-
-<span class="code-comment"># Create directories if they don't exist (crucial on first boot)</span>
-os.<span class="code-function">makedirs</span>(<span class="code-keyword">'logs'</span>, exist_ok=<span class="code-keyword">True</span>)
-os.<span class="code-function">makedirs</span>(<span class="code-keyword">'output'</span>, exist_ok=<span class="code-keyword">True</span>)</code></pre>
-
-        <h2>4. Zero-Friction Edge Integration</h2>
-        <p>The final result is a robust, zero-configuration executable. Maintenance personnel can deploy Edge Sentinel on any Windows IPC simply by dropping the file and running an install flag via command line, completely isolating the monitoring logic from the primary manufacturing software stack.</p>
-
+  </div>
+</section></div><div class="wrap"><nav class="next" aria-label="Projects"><a href="project-universal-game-tools.html">Previous: Universal Game Tools</a><a href="project-cnc.html">Next: Industrial automation background</a></nav></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
     </div>
-
-    <footer>
-        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
-    </footer>
-
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,344 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume | Stefano Paglierani</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        /* NAVBAR */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 20px 40px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: var(--accent);
-        }
-
-        /* RESUME CONTAINER */
-        .resume-container {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* HEADER SECTION */
-        .resume-header {
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .resume-header h1 {
-            margin: 0;
-            font-size: 40px;
-        }
-
-        .resume-header h2 {
-            margin: 5px 0 15px 0;
-            color: var(--accent);
-            font-weight: 400;
-            font-size: 20px;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 20px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* TYPOGRAPHY & LAYOUT */
-        h3 {
-            color: var(--accent);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            font-size: 22px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        p {
-            color: var(--text-muted);
-        }
-
-        /* SKILLS GRID */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            color: var(--text-main);
-        }
-
-        .skills-grid ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .skills-grid li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 15px;
-        }
-
-        .skills-grid li::before {
-            content: "▹";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-        }
-
-        /* EXPERIENCE BLOCKS */
-        .job-block {
-            margin-bottom: 35px;
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 10px;
-        }
-
-        .job-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--text-main);
-            margin: 0;
-        }
-
-        .job-company {
-            font-size: 16px;
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .job-date {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .job-block ul {
-            padding-left: 20px;
-            color: var(--text-muted);
-        }
-
-        .job-block li {
-            margin-bottom: 10px;
-        }
-
-        /* BUTTON */
-        .download-btn {
-            display: block;
-            width: 200px;
-            margin: 50px auto 0 auto;
-            text-align: center;
-            background-color: transparent;
-            color: var(--accent);
-            padding: 12px 24px;
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .download-btn:hover {
-            background-color: var(--accent);
-            color: var(--bg-color);
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            margin-top: 50px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Résumé | Stefano Paglierani</title>
+<meta name="description" content="Résumé of Stefano Paglierani: software developer and product builder with AI-directed development and an industrial automation background. Open to relocation to Northern Colorado.">
+<meta property="og:title" content="Résumé | Stefano Paglierani">
+<meta property="og:description" content="Résumé of Stefano Paglierani: software developer and product builder with AI-directed development and an industrial automation background. Open to relocation to Northern Colorado.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work">Work</a><a href="resume.html" aria-current="page">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><div class="resume">
+  <aside class="resume-side">
+    <h1 class="wide">Stefano Paglierani</h1>
+    <p class="lead">Software developer and product builder. AI-directed development, industrial automation background.</p>
+    <div class="plate"><dl><dt>Location</dt><dd>Italy, open to relocation to Northern Colorado</dd><dt>Work authorization</dt><dd>EU citizen; seeking H-1B sponsorship, open to O-1 and other visa routes</dd><dt>Email</dt><dd><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></dd><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">stefano-paglierani</a></dd><dt>GitHub</dt><dd><a href="https://github.com/stefanopaglierani">stefanopaglierani</a></dd></dl></div>
+    <div class="actions"><button class="btn" type="button" onclick="window.print()">Print or save as PDF</button></div>
+  </aside>
 
-    <header>
-        <nav>
-            <div class="logo">S.<span>Paglierani</span></div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="articles.html">Tech Blog</a>
-            </div>
-        </nav>
-    </header>
+  <div>
+    <h2>Profile</h2>
+    <p>I'm a software developer rebuilding and modernizing programming skills first learned in technical school, now combined with AI-assisted development. My core strength is solid programming and debugging logic: knowing how to reason through a system, structure it cleanly, and find what's actually broken.</p>
+    <p>Today I work as product owner and technical lead on my own projects, directing AI coding agents (Claude Code and Claude Cowork) to turn that judgment into working software fast. Since September 2026 that has shipped a mobile racing game, the members app of a 400-member parkour school, a self-running YouTube channel and a procedural terrain tool. Primary language: Python.</p>
 
-    <div class="resume-container">
-        
-        <div class="resume-header">
-            <h1>Stefano Paglierani</h1>
-            <h2>Software Developer, AI-Assisted Development</h2>
-            <div class="contact-info">
-                <span>Italy &rarr; Open to Relocation (Northern Colorado)</span>
-                <span>•</span>
-                <span> stefano.paglierani83@gmail.com </span>
-                <span>•</span>
-                <span> www.linkedin.com/in/stefano-paglierani-a4067a398 </span>
-            </div>
-            <p style="margin: 10px 0 0 0; font-size: 14px; color: var(--text-muted);">Work authorization: EU citizen based in Italy, actively seeking H-1B sponsorship. Open to discussing all visa pathways, including O-1.</p>
-        </div>
-
-        <div>
-            <p>I'm a software developer rebuilding and modernizing programming skills first learned in technical school, now combined with AI-assisted development. My core strength is solid programming and debugging logic &mdash; knowing how to reason through a system, structure it cleanly, and find what's actually broken. Today I pair that judgment with AI coding tools to turn it into working software fast. Primary language: Python.</p>
-        </div>
-
-        <h3>Core Competencies</h3>
-        <div class="skills-grid">
-            <ul>
-                <li>Python (Automation & Scripting)</li>
-                <li>C++ / Assembly / Pascal</li>
-                <li>AI-Assisted Development</li>
-            </ul>
-            <ul>
-                <li>Industrial Automation (PLC)</li>
-                <li>Systems Architecture & Debugging</li>
-                <li>Luau / OOP (Roblox Studio)</li>
-            </ul>
-            <ul>
-                <li>Procedural Generation</li>
-                <li>UI/UX Development</li>
-                <li>HTML / CSS</li>
-            </ul>
-        </div>
-
-        <h3>Professional Experience</h3>
-
-        <!-- ESPERIENZA 1 -->
-        <div class="job-block">
-            <div class="job-header">
-                <div>
-                    <p class="job-title">Independent Software Developer & Scripter</p>
-                    <p class="job-company">Freelance / Independent Projects</p>
-                </div>
-                <div class="job-date">March 2026 – Present</div>
-            </div>
-            <ul>
-                <li><strong>Systems Architecture:</strong> Engineered robust survival mechanics, dynamic character loops, and real-time resource tracking using Luau within the Roblox Studio engine.</li>
-                <li><strong>Procedural Programming:</strong> Developed automated systems for procedural generation and managed underlying database structures to ensure seamless state execution across simulation environments.</li>
-                <li><strong>UI/UX & Debugging:</strong> Designed functional user interfaces from scratch. Leveraged LLMs and advanced debugging techniques to resolve complex execution bugs and streamline the development cycle.</li>
-            </ul>
-        </div>
-
-        <!-- ESPERIENZA 2 -->
-        <div class="job-block">
-            <div class="job-header">
-                <div>
-                    <p class="job-title">Logistics & Operations</p>
-                    <p class="job-company">SCM Group</p>
-                </div>
-                <div class="job-date">2023 – Present</div>
-            </div>
-            <ul>
-                <li>Operations role within a leading Italian manufacturer of industrial CNC and woodworking machinery, which keeps me close to real manufacturing and automation environments day to day.</li>
-            </ul>
-        </div>
-
-        <!-- ESPERIENZA 3 -->
-        <div class="job-block">
-            <div class="job-header">
-                <div>
-                    <p class="job-title">Founder</p>
-                    <p class="job-company">Da Vinci Glamping Resort (Self-Employed)</p>
-                </div>
-                <div class="job-date">2023 – Present</div>
-            </div>
-            <ul>
-                <li>Founder of a self-funded, early-stage off-grid hospitality concept, combining clean energy infrastructure and smart-home automation design with social media outreach to validate interest ahead of a planned crowdfunding campaign. Personal entrepreneurial project run alongside my main employment.</li>
-            </ul>
-        </div>
-
-        <h3>Education</h3>
-        <div class="job-block">
-            <div class="job-header">
-                <div>
-                    <p class="job-title">Perito Informatico &mdash; Informatica, specializzazione Programmatore Software</p>
-                    <p class="job-company">ITIS Blaise Pascal, Cesena (FC), Italy</p>
-                </div>
-                <div class="job-date">1996 – 2002</div>
-            </div>
-            <p style="margin-top: 5px;">Five-year Italian technical high school program (Istituto Tecnico Industriale Statale) combining general education with computer science and software programming coursework.</p>
-        </div>
-
-        <h3>Certifications</h3>
-        <div class="job-block">
-            <div class="job-header">
-                <div>
-                    <p class="job-title">Tecnico per l'Automazione Industriale (800h)</p>
-                    <p class="job-company">CESCOT Italia</p>
-                </div>
-                <div class="job-date">May 2015</div>
-            </div>
-        </div>
-
+    <h2>Core competencies</h2>
+    <div class="skills">
+      <div><h3>Languages</h3><ul><li>Python (automation and scripting)</li><li>C++ / Assembly / Pascal</li><li>Luau / OOP (Roblox Studio)</li><li>HTML / CSS</li></ul></div>
+      <div><h3>Building with AI</h3><ul><li>AI-assisted development</li><li>Product ownership and technical direction of AI coding agents</li><li>Briefs, decision records and acceptance criteria</li><li>Testing on real devices, design and security reviews</li></ul></div>
+      <div><h3>Systems</h3><ul><li>Industrial automation (PLC)</li><li>Systems architecture and debugging</li><li>Procedural generation</li><li>UI/UX development</li></ul></div>
+      <div><h3>Stacks shipped</h3><ul><li>Godot 4, GDScript, Android builds</li><li>React, Vite, Node.js, SQLite</li><li>GitHub Actions, ffmpeg, NumPy</li><li>Windows services, PyInstaller</li></ul></div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
-    </footer>
+    <h2>Professional experience</h2>
+    <div class="job">
+      <div class="job-top"><h3>Independent Software Developer &amp; Scripter</h3><span class="when">March 2026 &ndash; present</span></div>
+      <p class="org">Freelance / independent projects</p>
+      <ul>
+        <li><b>Nitro Underground</b> (Godot 4, Android): directed a 3D street-racing game through 26 playable versions in 13 days, with hand-written vehicle physics checked by an automated test bench and circuits defined as plain-text maps. <a href="project-nitro-underground.html">Case study</a></li>
+        <li><b>XPLORE Parkour app</b> (React, Node.js, SQLite): led product and architecture for the members app and website of a 400-member school: bookings, instalment memberships, Italian tax receipts, community, and a rules engine with 94 automated checks. <a href="project-xplore-parkour.html">Case study</a></li>
+        <li><b>Cozy Ambience</b> (Python, GitHub Actions): built a zero-cost pipeline that animates still images with depth-aware effects, layers ambient audio and uploads to YouTube on a schedule; 18 scenes uploaded. <a href="project-cozy-ambience.html">Case study</a></li>
+        <li><b>Universal Game Tools</b> (Godot 4.7.2): specified a deterministic procedural island generator through six decision records and 17 acceptance criteria, released 0.1.0 in one day. <a href="project-universal-game-tools.html">Case study</a></li>
+        <li><b>Systems architecture:</b> engineered survival mechanics, dynamic character loops and real-time resource tracking using Luau in the Roblox Studio engine.</li>
+        <li><b>Procedural programming:</b> developed automated systems for procedural generation and managed the underlying data structures to keep state consistent across simulation environments.</li>
+        <li><b>UI/UX and debugging:</b> designed functional user interfaces from scratch, and used LLMs and structured debugging to resolve complex execution bugs and shorten the development cycle.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-top"><h3>Logistics &amp; Operations</h3><span class="when">2023 &ndash; present</span></div>
+      <p class="org">SCM Group</p>
+      <ul><li>Operations role within a leading Italian manufacturer of industrial CNC and woodworking machinery, which keeps me close to real manufacturing and automation environments day to day.</li></ul>
+    </div>
+    <div class="job">
+      <div class="job-top"><h3>Founder</h3><span class="when">2023 &ndash; present</span></div>
+      <p class="org">Da Vinci Glamping Resort (self-employed)</p>
+      <ul><li>Founder of a self-funded, early-stage off-grid hospitality concept, combining clean energy infrastructure and smart-home automation design with social media outreach to validate interest ahead of a planned crowdfunding campaign. Personal entrepreneurial project run alongside my main employment.</li></ul>
+    </div>
 
+    <h2>Personal projects</h2>
+    <div class="job">
+      <div class="job-top"><h3>Edge Sentinel</h3><span class="when">2026</span></div>
+      <ul><li>Python Windows service that monitors the wear of industrial-PC backup batteries and writes an alarm flag for a separate UI; packaged with PyInstaller. <a href="project-edge-sentinel.html">Case study</a></li></ul>
+    </div>
+
+    <h2>Education</h2>
+    <div class="job">
+      <div class="job-top"><h3>Perito Informatico &mdash; Informatica, specializzazione Programmatore Software</h3><span class="when">1996 &ndash; 2002</span></div>
+      <p class="org">ITIS Blaise Pascal, Cesena (FC), Italy</p>
+      <p>Five-year Italian technical high school program (Istituto Tecnico Industriale Statale) combining general education with computer science and software programming coursework.</p>
+    </div>
+
+    <h2>Certifications</h2>
+    <div class="job">
+      <div class="job-top"><h3>Tecnico per l'Automazione Industriale (800h)</h3><span class="when">May 2015</span></div>
+      <p class="org">CESCOT Italia</p>
+    </div>
+  </div>
+</div></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

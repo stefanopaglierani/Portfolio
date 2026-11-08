@@ -1,23 +1,38 @@
-# Stefano Paglierani | Technical Portfolio & Projects
+# Stefano Paglierani | Portfolio
 
-Welcome to my central repository. I'm a software developer based in Italy, rebuilding hands-on programming skills with AI-assisted development, and actively seeking H-1B sponsorship to relocate to Northern Colorado.
+Source of my personal portfolio: who I am, what I've built, and how I work.
 
-This repository is the source code for my personal technical portfolio and hosts documentation for my ongoing projects.
+I trained as an industrial automation technician and today I build software as product owner and technical lead, directing AI coding agents (Claude Code and Claude Cowork) from the first brief to the release. I'm based in Italy, relocating to Northern Colorado, and seeking H-1B sponsorship (open to O-1 and other visa routes).
 
-## 🚀 Core Competencies
-* **Primary language:** Python (automation, background services, scripting).
-* **Also:** C++, Assembly, Pascal, Industrial Automation / PLC, Luau (OOP, Roblox Studio).
-* **Certifications:** Tecnico per l'Automazione Industriale, 800-hour program, CESCOT Italia (2015).
-* **AI-Assisted Development:** Pairing programming/debugging logic with AI coding tools to build working software fast.
+## Featured projects
 
-## 📁 Featured Projects (Live on Website)
-1. **Edge Sentinel:** A personal Python project &mdash; a background daemon monitoring industrial-PC battery health, packaged as a native Windows Service. [Source code](https://github.com/stefanopaglierani/edge-sentinel).
-2. **Mars Survival Simulation:** A complex, logic-driven environment built with Luau, featuring procedural generation, database management, and functional UI/UX.
-3. **Industrial Automation Background:** How an 800-hour CESCOT automation certification and an operations role at an industrial CNC machinery manufacturer (SCM Group) shape my move into automation-adjacent software work.
-4. **Da Vinci Glamping Resort:** A self-funded, early-stage off-grid hospitality concept &mdash; concept design and social outreach so far, honestly labeled as not yet built out.
+| Project | What it is | Links |
+|---|---|---|
+| **Nitro Underground** | 3D street-racing game for Android in Godot 4: hand-written vehicle physics checked by a test bench, circuits written as text maps, 26 playable versions in 13 days | [Case study](project-nitro-underground.html) · [Source](https://github.com/stefanopaglierani/nitro-underground) |
+| **XPLORE Parkour app** | Members app and website for a 400-member parkour school: bookings, instalment memberships, Italian tax receipts, community; one rules engine for server, browser and tests | [Case study](project-xplore-parkour.html) · [Source](https://github.com/stefanopaglierani/xplore-parkour-app) |
+| **Cozy Ambience** | Zero-cost pipeline on GitHub Actions that animates still images with depth-aware effects, layers ambient sound and uploads to YouTube on a schedule | [Case study](project-cozy-ambience.html) · [YouTube](https://www.youtube.com/@relaxing-video-b1k) · [Source](https://github.com/stefanopaglierani/cozy-ambience) |
+| **Universal Game Tools** | Game-agnostic tools for Godot; first module: a deterministic procedural island generator designed through decision records | [Case study](project-universal-game-tools.html) · [Source](https://github.com/stefanopaglierani/universal-game-tools) |
+| **Edge Sentinel** | Python Windows service that monitors the backup battery of industrial PCs | [Case study](project-edge-sentinel.html) · [Source](https://github.com/stefanopaglierani/Edge-sentinel) |
 
-## 📖 Technical Articles
-The tech blog covers Edge Sentinel's architecture, a conceptual offline-first AI assistant for motorcyclists, and server-side validation patterns in Luau.
+Also on the site: my industrial automation background (CESCOT certification, SCM Group), the Mars Survival Simulation in Luau, the Da Vinci Glamping concept, a résumé and technical articles.
+
+## How the site is built
+
+Plain HTML and CSS, no framework and no build step: every page is a static file that opens directly in a browser.
+
+```
+index.html                  home: production log, selected work, background
+project-*.html              one case study per project
+resume.html                 résumé (print-friendly: "Print or save as PDF")
+articles.html, article-*.html   technical writing
+assets/css/site.css         the whole visual system (colours, type scale, layouts)
+assets/js/site.js           one small script: plays the production log once
+assets/fonts/               Archivo variable font, self-hosted (SIL Open Font License)
+assets/img/                 screenshots from each project's repository
+```
+
+Design notes: a light "machine enamel" background, ink-blue type, signal yellow used only for nameplates, and a single typeface (Archivo) whose width axis does the work: wide for names, normal for reading, condensed for data. Pages are responsive, keyboard-accessible, and respect reduced-motion settings.
 
 ---
-*For professional inquiries and full technical background, please connect with me on [LinkedIn](https://www.linkedin.com/in/stefano-paglierani-a4067a398/).*
+
+*For professional inquiries: [LinkedIn](https://www.linkedin.com/in/stefano-paglierani-a4067a398/) · stefano.paglierani83@gmail.com*

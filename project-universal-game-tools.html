@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universal Game Tools — case study | Stefano Paglierani</title>
+<meta name="description" content="A game-agnostic procedural island generator for Godot 4.7, designed through six decision records, deterministic by seed, and tested headless on two physics engines.">
+<meta property="og:title" content="Universal Game Tools — case study | Stefano Paglierani">
+<meta property="og:description" content="A game-agnostic procedural island generator for Godot 4.7, designed through six decision records, deterministic by seed, and tested headless on two physics engines.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/ugt/demo.jpg">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work" aria-current="page">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="index.html#work">Work</a> / Universal Game Tools</p>
+  <div class="case-head">
+    <div>
+      <h1 class="wide">Universal Game Tools</h1>
+      <p class="lead">A personal library of reusable, documented tools for Godot, designed so each one can be dropped into any game. The first module, UPTG, generates procedural islands: an irregular coastline, hills, a mountain region, a mesh and matching collision.</p>
+      <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/universal-game-tools">Source on GitHub</a><a class="btn" href="https://github.com/stefanopaglierani/universal-game-tools/tree/main/Documentation/architecture/decisions">Design decisions</a></div>
+    </div>
+    <div class="plate"><dl><dt>Role</dt><dd>Architect and reviewer: specification, the six design decisions, acceptance criteria, testing on my own laptop</dd><dt>Built with</dt><dd>Godot 4.7.2, GDScript, headless test runner; Godot Physics and Jolt</dd><dt>Timeline</dt><dd>6 November 2026: from empty repository to release 0.1.0 in one day</dd><dt>Status</dt><dd>UPTG 0.1.0 released; road and world generators planned</dd><dt>Code</dt><dd>About 1,600 lines of addon and test code</dd></dl></div>
+  </div>
+</div><div class="wrap"><figure class="case-hero"><img src="assets/img/ugt/demo.jpg" alt="UPTG demo window: an island in a blue sea with a panel listing seed, grid size, triangle count, generation times and a heights checksum" width="1600" height="900" loading="lazy"><figcaption>The demo scene, rendered for this page from the repository. The panel shows the real figures: 131,072 triangles, height field in 35 ms, collision in 4 ms, and a checksum of the heights.</figcaption></figure></div><div class="wrap"><section class="case-body">
+  <h2>Architecture before code</h2>
+  <div>
+
+<p class="lead">Game projects tend to grow tools that only work inside that one game. This repository exists to stop that: each tool is game-agnostic, ships as a Godot addon, and comes with a demo, documentation and tests.</p>
+<p>Before the first line of code, the generator had a written specification and six decision records, each with the options considered and the one I chose:</p>
+<ul class="facts">
+<li><b>A data contract</b> between the height field, the mesh and the collision, so each part can be replaced on its own.</li>
+<li><b>Heightmap collision by default</b>, with a full triangle mesh or no collision as options.</li>
+<li><b>A square-cell grid</b> with precise rules for where every vertex sits and how it is stored.</li>
+<li><b>Seeds and determinism</b>: sub-seeds derived with fixed salts, global random functions banned from the addon.</li>
+<li><b>An addon layout</b> that keeps core, builders, nodes, materials and presets apart.</li>
+<li><b>Cost protection</b>: before generating, the tool estimates memory and refuses configurations that would freeze the machine, unless the node explicitly allows large terrains.</li>
+</ul>
+<p>Work then went through four milestones on separate branches, each merged after its tests passed: data and height field, mesh and node, collision, and quality with presets and measurements.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Same seed, same island</h2>
+  <div>
+
+<p>Every island comes from a seed. The tests generate the same seed twice and compare checksums of all heights; a different seed must change them. That makes islands reproducible, which is what a game needs for saved worlds and shared maps.</p>
+<div class="gallery three">
+  <figure class=""><img src="assets/img/ugt/uptg_12345_solid.jpg" alt="Island generated from seed 12345" width="1200" height="675" loading="lazy"><figcaption>Seed 12345.</figcaption></figure>
+  <figure class=""><img src="assets/img/ugt/uptg_777_solid.jpg" alt="Island generated from seed 777, a different coastline" width="1200" height="675" loading="lazy"><figcaption>Seed 777.</figcaption></figure>
+  <figure class=""><img src="assets/img/ugt/uptg_2026_solid.jpg" alt="Island generated from seed 2026, a different coastline" width="1200" height="675" loading="lazy"><figcaption>Seed 2026.</figcaption></figure>
+</div>
+<figure class="wide-figure"><img src="assets/img/ugt/uptg_12345_wire.jpg" alt="The seed 12345 island in wireframe, showing the regular triangle grid draped over the mountain" width="1200" height="675" loading="lazy"><figcaption>Wireframe view: a 256 &times; 256 cell grid, 4 m per cell, colours by slope and height (sand, grass, rock).</figcaption></figure>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Tested like a component</h2>
+  <div>
+
+<p>Seventeen acceptance criteria were written in the specification before implementation. Most are automated and run headless, without opening the editor:</p>
+<ul class="facts">
+<li>Mesh validity: indices in range, no NaN, unit normals, consistent winding, expected triangle count.</li>
+<li>Collision matches the mesh within 1 cm, measured with 2,000 vertical rays per case, on square and non-square grids, in both collision modes.</li>
+<li>25 spheres dropped on the island come to rest on the surface; a character capsule walks 15 seconds up the mountain without sinking. Verified on Godot Physics and on Jolt.</li>
+<li>20 regenerations in a row do not grow the number of nodes, objects or memory.</li>
+<li>The addon never references paths outside itself or any specific game, checked by text search.</li>
+</ul>
+<h3>Measured on a laptop</h3>
+<p class="small muted">Godot 4.7.2, Windows, Intel UHD Graphics 620, default island preset, 4 m cells.</p>
+<div class="table-scroll"><table class="numbers">
+<thead><tr><th>Grid</th><th>Triangles</th><th>Height field</th><th>Mesh</th><th>Heightmap collision</th></tr></thead>
+<tbody>
+<tr><td>128 &times; 128</td><td>32,768</td><td>33 ms</td><td>80 ms</td><td>4.5 ms</td></tr>
+<tr><td>256 &times; 256</td><td>131,072</td><td>166 ms</td><td>348 ms</td><td>11 ms</td></tr>
+<tr><td>512 &times; 512</td><td>524,288</td><td>524 ms</td><td>1,303 ms</td><td>46 ms</td></tr>
+</tbody></table></div>
+<p>The measurements were then used to recalibrate the memory estimate, so the cost protection uses real numbers instead of guesses.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>What comes next</h2>
+  <div>
+
+<p>The repository is laid out for three modules: the terrain generator, a procedural road generator and a world generator that combines them. The rule I set is that the next module starts only after the first one is tested and approved. All documentation is written in English and Italian.</p>
+
+  </div>
+</section></div><div class="wrap"><nav class="next" aria-label="Projects"><a href="project-cozy-ambience.html">Previous: Cozy Ambience</a><a href="project-edge-sentinel.html">Next: Edge Sentinel</a></nav></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

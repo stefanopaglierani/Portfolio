@@ -1,190 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handling Client-Server Boundaries in Luau | Stefano Paglierani</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --code-bg: #0b1120;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
-        }
-
-        /* NAVBAR */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 20px 40px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: var(--accent);
-        }
-
-        /* ARTICLE HEADER */
-        .article-header {
-            max-width: 800px;
-            margin: 60px auto 40px auto;
-            padding: 0 20px;
-        }
-
-        .article-tag {
-            color: var(--accent);
-            font-family: monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .article-header h1 {
-            font-size: 42px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .article-meta {
-            color: var(--text-muted);
-            font-size: 14px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ARTICLE CONTENT */
-        .article-content {
-            max-width: 800px;
-            margin: 0 auto 80px auto;
-            padding: 0 20px;
-            color: #cbd5e1;
-        }
-
-        .article-content h2 {
-            color: var(--text-main);
-            font-size: 28px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-        }
-
-        .article-content h3 {
-            color: var(--accent);
-            font-size: 22px;
-            margin-top: 40px;
-            margin-bottom: 15px;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-        }
-
-        /* CODE BLOCK STYLING */
-        pre {
-            background-color: var(--code-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 30px 0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        code {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            color: #6ee7b7; /* Verde hacker elegante */
-        }
-        
-        .code-comment {
-            color: #64748b;
-            font-style: italic;
-        }
-
-        .code-keyword {
-            color: #c084fc;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Server-side validation in procedural worlds | Stefano Paglierani</title>
+<meta name="description" content="A dictionary-driven, server-validated building system in Luau: recipes, prerequisite checks, resource verification and procedural placement.">
+<meta property="og:title" content="Server-side validation in procedural worlds | Stefano Paglierani">
+<meta property="og:description" content="A dictionary-driven, server-validated building system in Luau: recipes, prerequisite checks, resource verification and procedural placement.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work">Work</a><a href="resume.html">Résumé</a><a href="articles.html" aria-current="page">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><article class="article">
+  <p class="crumbs"><a href="articles.html">Writing</a> / Software Development / Luau</p>
+  <h1 class="wide">Server-Side Validation & State Management in Procedural Environments</h1>
+  <p class="byline">Stefano Paglierani, 10 mins read</p>
+  <div class="callout"><p>Part of the <a href="project-mars.html">Mars Survival Simulation</a> project.</p></div>
 
-    <header>
-        <nav>
-            <div class="logo">S.<span>Paglierani</span></div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="articles.html">Tech Blog</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="article-header">
-        <span class="article-tag">Software Development / Luau</span>
-        <h1>Server-Side Validation & State Management in Procedural Environments</h1>
-        <div class="article-meta">
-            <span>By Stefano Paglierani</span>
-            <span>•</span>
-            <span>Est. Read: 10 mins</span>
-            <span>•</span>
-            <span>Systems Architecture</span>
-        </div>
-    </div>
-
-    <div class="article-content">
         
         <p>In developing complex simulation environments within Roblox Studio, maintaining the integrity of the client-server boundary is paramount. When building a procedural survival game with an intricate crafting and building system, allowing the client to dictate state changes is a fundamental security flaw that invites exploits and synchronization errors.</p>
         
@@ -194,89 +38,103 @@
         <p>The core challenge is processing dynamic player requests (e.g., "Build a Moisture Extractor") against a complex set of dependencies—checking shared global resources, verifying propaedeutic technology unlocks, and ensuring the correct procedural placement of the asset in the world—all without halting the server thread or creating execution bottlenecks.</p>
 
         <h3>1. The Data Structure: The Recipe Dictionary</h3>
-        <p>To ensure scalability, the crafting logic is decoupled from the execution logic[cite: 1]. I implemented a centralized, dictionary-based data structure (<code>CRAFT_RECIPES</code>) that acts as the single source of truth for all buildable assets[cite: 1].</p>
+        <p>To ensure scalability, the crafting logic is decoupled from the execution logic. I implemented a centralized, dictionary-based data structure (<code>CRAFT_RECIPES</code>) that acts as the single source of truth for all buildable assets.</p>
         
-        <p>This approach allows for rapid balancing and the addition of new items without modifying the core validation algorithms[cite: 1]. Each entry defines resource costs, item types (Structure, Upgrade, VIP), and propaedeutic requirements (<code>Requires</code>)[cite: 1].</p>
+        <p>This approach allows for rapid balancing and the addition of new items without modifying the core validation algorithms. Each entry defines resource costs, item types (Structure, Upgrade, VIP), and propaedeutic requirements (<code>Requires</code>).</p>
 
-        <pre><code><span class="code-comment">-- 📖 IL LIBRO DELLE RICETTE</span>
-<span class="code-keyword">local</span> CRAFT_RECIPES = {
-    [<span class="code-keyword">"MoistureExtractor"</span>] = { Rock = 15, Permafrost = 5, Type = <span class="code-keyword">"Structure"</span>, Requires = <span class="code-keyword">nil</span> },
-    [<span class="code-keyword">"PlanterBox"</span>] = { Rock = 10, Permafrost = 5, Type = <span class="code-keyword">"Structure"</span>, Requires = <span class="code-keyword">"MoistureExtractor"</span> },
-    [<span class="code-keyword">"ResidentialCoreSystem"</span>] = { Rock = 50, Crystal = 5, Gold = 20, Type = <span class="code-keyword">"Expansion"</span>, Slot = <span class="code-keyword">"Slot_Residential"</span>, Blueprint = <span class="code-keyword">"Residential"</span> },
-    [<span class="code-keyword">"TechDrillLV2"</span>] = { Rock = 20, Gold = 5, Type = <span class="code-keyword">"Upgrade"</span>, Requires = <span class="code-keyword">nil</span> },
-    [<span class="code-keyword">"MechaSuite"</span>] = { Type = <span class="code-keyword">"VIP"</span>, GamepassID = 987654321 }      
+        <pre class="code"><code><span class="c">-- 📖 IL LIBRO DELLE RICETTE</span>
+<span class="k">local</span> CRAFT_RECIPES = {
+    [<span class="k">"MoistureExtractor"</span>] = { Rock = 15, Permafrost = 5, Type = <span class="k">"Structure"</span>, Requires = <span class="k">nil</span> },
+    [<span class="k">"PlanterBox"</span>] = { Rock = 10, Permafrost = 5, Type = <span class="k">"Structure"</span>, Requires = <span class="k">"MoistureExtractor"</span> },
+    [<span class="k">"ResidentialCoreSystem"</span>] = { Rock = 50, Crystal = 5, Gold = 20, Type = <span class="k">"Expansion"</span>, Slot = <span class="k">"Slot_Residential"</span>, Blueprint = <span class="k">"Residential"</span> },
+    [<span class="k">"TechDrillLV2"</span>] = { Rock = 20, Gold = 5, Type = <span class="k">"Upgrade"</span>, Requires = <span class="k">nil</span> },
+    [<span class="k">"MechaSuite"</span>] = { Type = <span class="k">"VIP"</span>, GamepassID = 987654321 }      
 }</code></pre>
 
         <h2>Validation & Procedural Instantiation</h2>
-        <p>When a client issues a <code>BuildRequest</code> via a RemoteEvent, the server intercepts the call and runs it through a strict, multi-tiered validation pipeline[cite: 1].</p>
+        <p>When a client issues a <code>BuildRequest</code> via a RemoteEvent, the server intercepts the call and runs it through a strict, multi-tiered validation pipeline.</p>
 
         <h3>2. The Validation Pipeline</h3>
-        <p>The server independently verifies the request against three critical parameters before any resources are deducted or assets spawned[cite: 1]:</p>
+        <p>The server independently verifies the request against three critical parameters before any resources are deducted or assets spawned:</p>
         <ol>
-            <li><strong>Premium Access Security:</strong> If the requested item is tagged as "VIP", the script queries the <code>MarketplaceService</code> to asynchronously verify ownership, logging potential bypass attempts[cite: 1].</li>
-            <li><strong>Propaedeutic Checks:</strong> It verifies if the player holds the required custom attributes (e.g., verifying if a player has built a <code>MoistureExtractor</code> before allowing a <code>PlanterBox</code>)[cite: 1].</li>
-            <li><strong>Resource Verification:</strong> A dedicated function (<code>checkResources</code>) compares the recipe costs against real-time global values stored in <code>ReplicatedStorage</code>[cite: 1].</li>
+            <li><strong>Premium Access Security:</strong> If the requested item is tagged as "VIP", the script queries the <code>MarketplaceService</code> to asynchronously verify ownership, logging potential bypass attempts.</li>
+            <li><strong>Propaedeutic Checks:</strong> It verifies if the player holds the required custom attributes (e.g., verifying if a player has built a <code>MoistureExtractor</code> before allowing a <code>PlanterBox</code>).</li>
+            <li><strong>Resource Verification:</strong> A dedicated function (<code>checkResources</code>) compares the recipe costs against real-time global values stored in <code>ReplicatedStorage</code>.</li>
         </ol>
 
-        <pre><code><span class="code-comment">-- 🛑 Controllo Requisiti Base (Propedeuticità)</span>
-<span class="code-keyword">if</span> recipe.Requires <span class="code-keyword">and not</span> player:GetAttribute(<span class="code-keyword">"Has_"</span> .. recipe.Requires) <span class="code-keyword">then</span>
-    aresResponse:FireClient(player, <span class="code-keyword">"ACCESS DENIED: BUILD "</span> .. string.upper(recipe.Requires) .. <span class="code-keyword">" FIRST."</span>, <span class="code-keyword">true</span>)
-    <span class="code-keyword">return</span>
-<span class="code-keyword">end</span>
+        <pre class="code"><code><span class="c">-- 🛑 Controllo Requisiti Base (Propedeuticità)</span>
+<span class="k">if</span> recipe.Requires <span class="k">and not</span> player:GetAttribute(<span class="k">"Has_"</span> .. recipe.Requires) <span class="k">then</span>
+    aresResponse:FireClient(player, <span class="k">"ACCESS DENIED: BUILD "</span> .. string.upper(recipe.Requires) .. <span class="k">" FIRST."</span>, <span class="k">true</span>)
+    <span class="k">return</span>
+<span class="k">end</span>
 
-<span class="code-comment">-- 💰 Controllo Risorse Multiplo</span>
-<span class="code-keyword">local function</span> checkResources(recipe)
-    <span class="code-keyword">if</span> recipe.Rock <span class="code-keyword">and</span> storedRock.Value < recipe.Rock <span class="code-keyword">then return false end</span>
-    <span class="code-keyword">if</span> recipe.Permafrost <span class="code-keyword">and</span> storedPermafrost.Value < recipe.Permafrost <span class="code-keyword">then return false end</span>
-    <span class="code-keyword">if</span> recipe.Gold <span class="code-keyword">and</span> storedGold.Value < recipe.Gold <span class="code-keyword">then return false end</span>
-    <span class="code-keyword">if</span> recipe.Crystal <span class="code-keyword">and</span> storedCrystal.Value < recipe.Crystal <span class="code-keyword">then return false end</span>
-    <span class="code-keyword">return true</span>
-<span class="code-keyword">end</span></code></pre>
+<span class="c">-- 💰 Controllo Risorse Multiplo</span>
+<span class="k">local function</span> checkResources(recipe)
+    <span class="k">if</span> recipe.Rock <span class="k">and</span> storedRock.Value < recipe.Rock <span class="k">then return false end</span>
+    <span class="k">if</span> recipe.Permafrost <span class="k">and</span> storedPermafrost.Value < recipe.Permafrost <span class="k">then return false end</span>
+    <span class="k">if</span> recipe.Gold <span class="k">and</span> storedGold.Value < recipe.Gold <span class="k">then return false end</span>
+    <span class="k">if</span> recipe.Crystal <span class="k">and</span> storedCrystal.Value < recipe.Crystal <span class="k">then return false end</span>
+    <span class="k">return true</span>
+<span class="k">end</span></code></pre>
 
         <h3>3. Dynamic Asset Spawning</h3>
-        <p>Once validated, the system handles the physical manifestation of the request[cite: 1]. The <code>spawnStructure</code> function handles the procedural placement of models[cite: 1]. It locates a designated spawn folder in the Workspace, selects a random available location node (to prevent structural overlap), calculates the correct bounding box offset to ensure the model sits flush with the terrain, and pivots the cloned asset into position[cite: 1]. The location node is then destroyed to prevent future overlapping spawns[cite: 1].</p>
+        <p>Once validated, the system handles the physical manifestation of the request. The <code>spawnStructure</code> function handles the procedural placement of models. It locates a designated spawn folder in the Workspace, selects a random available location node (to prevent structural overlap), calculates the correct bounding box offset to ensure the model sits flush with the terrain, and pivots the cloned asset into position. The location node is then destroyed to prevent future overlapping spawns.</p>
 
-        <pre><code><span class="code-keyword">local function</span> spawnStructure(itemName, player)
-    <span class="code-keyword">local</span> templateName = (itemName == <span class="code-keyword">"MoistureExtractor"</span>) <span class="code-keyword">and "watertower" or</span> itemName
-    <span class="code-keyword">local</span> template = ReplicatedStorage:FindFirstChild(templateName)
-    <span class="code-keyword">local</span> locations = Workspace:FindFirstChild(itemName .. <span class="code-keyword">"Locations"</span>)
+        <pre class="code"><code><span class="k">local function</span> spawnStructure(itemName, player)
+    <span class="k">local</span> templateName = (itemName == <span class="k">"MoistureExtractor"</span>) <span class="k">and "watertower" or</span> itemName
+    <span class="k">local</span> template = ReplicatedStorage:FindFirstChild(templateName)
+    <span class="k">local</span> locations = Workspace:FindFirstChild(itemName .. <span class="k">"Locations"</span>)
 
-    <span class="code-comment">-- Validazione robusta dei target</span>
-    <span class="code-keyword">if not</span> template <span class="code-keyword">then return false</span>, <span class="code-keyword">"SYSTEM ERROR" end</span>
-    <span class="code-keyword">if not</span> locations <span class="code-keyword">or</span> #locations:GetChildren() == 0 <span class="code-keyword">then return false</span>, <span class="code-keyword">"NO BUILD LOCATION" end</span>
+    <span class="c">-- Validazione robusta dei target</span>
+    <span class="k">if not</span> template <span class="k">then return false</span>, <span class="k">"SYSTEM ERROR" end</span>
+    <span class="k">if not</span> locations <span class="k">or</span> #locations:GetChildren() == 0 <span class="k">then return false</span>, <span class="k">"NO BUILD LOCATION" end</span>
 
-    <span class="code-keyword">local</span> spots = locations:GetChildren()
-    <span class="code-keyword">local</span> chosen = spots[math.random(1, #spots)]
-    <span class="code-keyword">local</span> clone = template:Clone()
+    <span class="k">local</span> spots = locations:GetChildren()
+    <span class="k">local</span> chosen = spots[math.random(1, #spots)]
+    <span class="k">local</span> clone = template:Clone()
 
-    <span class="code-comment">-- Calcolo dell'offset in base alla classe dell'oggetto</span>
-    <span class="code-keyword">local</span> halfHeight = 0
-    <span class="code-keyword">if</span> clone:IsA(<span class="code-keyword">"Model"</span>) <span class="code-keyword">then</span>
-        <span class="code-keyword">local</span> _, size = clone:GetBoundingBox()
+    <span class="c">-- Calcolo dell'offset in base alla classe dell'oggetto</span>
+    <span class="k">local</span> halfHeight = 0
+    <span class="k">if</span> clone:IsA(<span class="k">"Model"</span>) <span class="k">then</span>
+        <span class="k">local</span> _, size = clone:GetBoundingBox()
         halfHeight = size.Y / 2
-    <span class="code-keyword">elseif</span> clone:IsA(<span class="code-keyword">"BasePart"</span>) <span class="code-keyword">then</span>
+    <span class="k">elseif</span> clone:IsA(<span class="k">"BasePart"</span>) <span class="k">then</span>
         halfHeight = clone.Size.Y / 2
-    <span class="code-keyword">end</span>
+    <span class="k">end</span>
 
-    <span class="code-keyword">local</span> finalCFrame = chosen.CFrame * CFrame.new(0, halfHeight, 0)
-    <span class="code-keyword">if</span> clone:IsA(<span class="code-keyword">"Model"</span>) <span class="code-keyword">then</span> clone:PivotTo(finalCFrame) <span class="code-keyword">else</span> clone.CFrame = finalCFrame <span class="code-keyword">end</span>
+    <span class="k">local</span> finalCFrame = chosen.CFrame * CFrame.new(0, halfHeight, 0)
+    <span class="k">if</span> clone:IsA(<span class="k">"Model"</span>) <span class="k">then</span> clone:PivotTo(finalCFrame) <span class="k">else</span> clone.CFrame = finalCFrame <span class="k">end</span>
 
     clone.Parent = Workspace
     chosen:Destroy()
-    <span class="code-keyword">return true</span>, <span class="code-keyword">""</span>
-<span class="code-keyword">end</span></code></pre>
+    <span class="k">return true</span>, <span class="k">""</span>
+<span class="k">end</span></code></pre>
 
         <h2>Dynamic Inventory Management</h2>
-        <p>Beyond structural spawns, the script dynamically manages player inventory upgrades[cite: 1]. When an upgrade like a <code>TechDrillLV2</code> or a <code>BackPackLV3</code> is validated, the server iterates through both the player's <code>Backpack</code> and physically equipped <code>Character</code> to locate and destroy obsolete instances of the tool before cloning and injecting the upgraded version[cite: 1]. This ensures inventory state consistency and prevents item duplication exploits[cite: 1].</p>
+        <p>Beyond structural spawns, the script dynamically manages player inventory upgrades. When an upgrade like a <code>TechDrillLV2</code> or a <code>BackPackLV3</code> is validated, the server iterates through both the player's <code>Backpack</code> and physically equipped <code>Character</code> to locate and destroy obsolete instances of the tool before cloning and injecting the upgraded version. This ensures inventory state consistency and prevents item duplication exploits.</p>
 
         <h2>Conclusion</h2>
-        <p>By enforcing a strict validation pipeline on the server and utilizing dictionary-driven logic, the <code>BuilderService</code> ensures that the simulation remains secure, scalable, and modular[cite: 1]. It serves as a prime example of translating complex operational logic into a robust backend architecture.</p>
+        <p>By enforcing a strict validation pipeline on the server and utilizing dictionary-driven logic, the <code>BuilderService</code> ensures that the simulation remains secure, scalable, and modular. It serves as a prime example of translating complex operational logic into a robust backend architecture.</p>
 
+    
+</article></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
     </div>
-
-    <footer>
-        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
-    </footer>
-
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cozy Ambience — case study | Stefano Paglierani</title>
+<meta name="description" content="A zero-cost pipeline on GitHub Actions that animates a still image with depth-aware rain, snow and water, layers ambient sound and uploads relaxing videos to YouTube on a schedule.">
+<meta property="og:title" content="Cozy Ambience — case study | Stefano Paglierani">
+<meta property="og:description" content="A zero-cost pipeline on GitHub Actions that animates a still image with depth-aware rain, snow and water, layers ambient sound and uploads relaxing videos to YouTube on a schedule.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/cozy/fjord-porch-rain.jpg">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work" aria-current="page">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="index.html#work">Work</a> / Cozy Ambience</p>
+  <div class="case-head">
+    <div>
+      <h1 class="wide">Cozy Ambience</h1>
+      <p class="lead">A zero-cost pipeline that runs a YouTube channel of relaxing ambience videos: a scene inspired by a real place, gentle animation, layered natural sound, and an automatic upload, all on GitHub Actions while my PC is off.</p>
+      <div class="actions"><a class="btn solid" href="https://www.youtube.com/@relaxing-video-b1k">Watch on YouTube</a><a class="btn" href="https://github.com/stefanopaglierani/cozy-ambience">Source on GitHub</a></div>
+    </div>
+    <div class="plate"><dl><dt>Role</dt><dd>Concept, visual and sound standards, approval of every scene, publishing</dd><dt>Built with</dt><dd>Python, NumPy, Pillow, ffmpeg, Depth Anything V2, YouTube Data API, GitHub Actions</dd><dt>Timeline</dt><dd>Live since 17 October 2026</dd><dt>Output</dt><dd>18 scenes uploaded; long videos of 30&ndash;45 minutes plus Shorts</dd><dt>Cost</dt><dd>Zero: free CI minutes and open-source tools</dd></dl></div>
+  </div>
+</div><div class="wrap"><figure class="case-hero"><img src="assets/img/cozy/fjord-porch-rain.jpg" alt="A wooden porch above a Norwegian fjord on a rainy afternoon, with a lantern, a blanket and waterfalls on the cliffs" width="1376" height="768" loading="lazy"><figcaption>Rainy afternoon on a Norwegian fjord porch, the channel's first scene. Images are AI artwork inspired by real places, and every video says so.</figcaption></figure></div><div class="wrap"><section class="case-body">
+  <h2>From one picture to 45 minutes</h2>
+  <div>
+
+<p class="lead">Each video starts as one still image. The pipeline makes it breathe.</p>
+<div class="flow">
+  <div><b>Scene</b><span>An image and a catalog entry: place, title, description, tags</span></div>
+  <div><b>Depth</b><span>Depth Anything V2 maps what is near and what is far</span></div>
+  <div><b>Loop</b><span>20 seconds of animation that closes without a seam</span></div>
+  <div><b>Sound</b><span>Ambient layers of different lengths, never the same mix twice</span></div>
+  <div><b>Upload</b><span>Private on YouTube, with the synthetic-content flag on</span></div>
+</div>
+<p>The animation is procedural, written in Python with NumPy: rain on three depths, snow, drifting fog, clouds that move 31 pixels per loop, meadows swaying in gusts, water flowing along its current with sun glints, steam rising from a cup. Every particle travels a whole number of screens per cycle, so the 20-second loop repeats for 45 minutes without a visible jump.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Layers, like a stage set</h2>
+  <div>
+
+<p>Rain must never fall in front of the porch roof. Each new image automatically gets a depth map from a GitHub workflow; the near objects are cut out with a depth threshold and, where needed, hand-drawn polygons. The order is always: animated background, then the untouched foreground on top, then the effects that belong to the foreground, like fire, steam and lanterns.</p>
+<div class="gallery">
+  <figure class=""><img src="assets/img/cozy/redwood-campfire.jpg" alt="A campfire and a camp chair in a redwood forest with sunbeams" width="1376" height="768" loading="lazy"><figcaption>Redwood campfire: the fire flickers and the sunbeams breathe.</figcaption></figure>
+  <figure class=""><img src="assets/img/cozy/redwood-campfire-depth.jpg" alt="Grayscale depth map of the same forest scene" width="800" height="447" loading="lazy"><figcaption>Its depth map: bright is near, dark is far.</figcaption></figure>
+</div>
+<p>Sound follows the same idea. Rain, drops on wood, thunder, a stream or birds are separate loops of 97, 131, 173 and 229 seconds. Because the lengths share no common factor, the combined mix doesn't repeat within a video. No music, only sounds that belong to the scene.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>A channel that runs itself</h2>
+  <div>
+
+<ul class="facts">
+<li>A scheduled workflow runs just after midnight Italian time on Tuesday, Thursday and Saturday. It picks the next approved scene (or the one with the nearest release date), renders the long video and two Shorts, and uploads them as private, so they are on YouTube before the morning.</li>
+<li>A daily workflow catches up on thumbnails and Shorts that the YouTube API quota postponed.</li>
+<li>When the queue is empty the run ends cleanly and uploads nothing.</li>
+<li>Nothing is published blind: a scene becomes "ready" only after I approve its image and test clip, and I make each video public myself.</li>
+<li>OAuth credentials live only in GitHub's encrypted secrets, never in the code.</li>
+</ul>
+<div class="gallery three">
+  <figure class=""><img src="assets/img/cozy/zermatt-snow-porch.jpg" alt="Snowy porch facing the Matterhorn with a blanket and snowshoes" width="1376" height="768" loading="lazy"><figcaption>Zermatt snow porch.</figcaption></figure>
+  <figure class=""><img src="assets/img/cozy/kyoto-ryokan-garden.jpg" alt="Veranda of a Japanese ryokan over an autumn garden with a teapot" width="1376" height="768" loading="lazy"><figcaption>Kyoto ryokan garden.</figcaption></figure>
+  <figure class=""><img src="assets/img/cozy/lapland-lake-dock.jpg" alt="Misty lake dock in Lapland at sunrise with a mug and a fishing rod" width="1376" height="768" loading="lazy"><figcaption>Lapland lake dock.</figcaption></figure>
+</div>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>The standard</h2>
+  <div>
+
+<p>I approved one reference video, a sunny Dolomites meadow, and wrote its qualities down as the standard for every scene: photorealistic first-person view from a cozy spot, a warm detail in the foreground, no people and no text, natural colours, water that is never still, 1080p at 24 fps. Writing the standard down is what lets the pipeline produce new scenes without me re-explaining taste every time.</p>
+<figure class="wide-figure"><img src="assets/img/cozy/dolomites-meadow-sun.jpg" alt="Sunny alpine meadow in the Dolomites seen from a wooden porch with a coffee cup and a stream" width="1376" height="768" loading="lazy"><figcaption>Dolomites meadow in the sun: the reference every other video is measured against.</figcaption></figure>
+
+  </div>
+</section></div><div class="wrap"><nav class="next" aria-label="Projects"><a href="project-xplore-parkour.html">Previous: XPLORE Parkour</a><a href="project-universal-game-tools.html">Next: Universal Game Tools</a></nav></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

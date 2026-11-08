@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nitro Underground — case study | Stefano Paglierani</title>
+<meta name="description" content="A 3D street-racing game for Android built in Godot in 13 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, tuned for a mid-range phone.">
+<meta property="og:title" content="Nitro Underground — case study | Stefano Paglierani">
+<meta property="og:description" content="A 3D street-racing game for Android built in Godot in 13 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, tuned for a mid-range phone.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/nitro/v0.21-costa.jpg">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work" aria-current="page">Work</a><a href="resume.html">Résumé</a><a href="articles.html">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="index.html#work">Work</a> / Nitro Underground</p>
+  <div class="case-head">
+    <div>
+      <h1 class="wide">Nitro Underground</h1>
+      <p class="lead">A 3D street-racing game for Android: overtaking through traffic, nitro, drifts, jumps, and police that show up when you cause too much damage. Name, world and circuits are original.</p>
+      <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/nitro-underground">Source on GitHub</a><a class="btn" href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/STORIA.md">Development diary</a></div>
+    </div>
+    <div class="plate"><dl><dt>Role</dt><dd>Concept, game design, product direction and every play-test</dd><dt>Built with</dt><dd>Godot 4.7, GDScript, Jolt physics; OpenGL ES on Android, Vulkan on PC</dd><dt>Timeline</dt><dd>27 October to 8 November 2026: 26 playable versions</dd><dt>Status</dt><dd>Playable prototype, v0.21</dd><dt>Code</dt><dd>About 7,500 lines of GDScript, written by Claude under my direction</dd></dl></div>
+  </div>
+</div><div class="wrap"><figure class="case-hero"><img src="assets/img/nitro/v0.21-costa.jpg" alt="Racing along a coastal road with palm trees, white houses and rocks" width="1280" height="720" loading="lazy"><figcaption>Version 0.21, the coast circuit: 51 new environment models placed along the road by code.</figcaption></figure></div><div class="wrap"><section class="case-body">
+  <h2>Why it exists</h2>
+  <div>
+
+<p class="lead">I wanted to find out how far one person can take a real game when the code is written by an AI and every product decision is made by a human who tests on his own phone.</p>
+<p>The answer, after 13 days: a racing game with a garage, a car dealer, tuning, money and reputation, four circuits, three AI rivals, traffic you can crash into and a police chase system. Each version went onto my Android phone or PC, I played it, wrote down what felt wrong, and that list became the brief for the next version.</p>
+<div class="gallery">
+  <figure class=""><img src="assets/img/nitro/v0.18-start.jpg" alt="Title screen with two cars racing on a wet coastal road at sunset" width="1280" height="720" loading="lazy"><figcaption>The start screen (v0.18).</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.17-garage.jpg" alt="Garage: one black muscle car between two arrows, name and specs below" width="1280" height="720" loading="lazy"><figcaption>The garage: three cars to choose from, and the choice is final (v0.17).</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.20.4-dealer.jpg" alt="Dealer showroom with a green coupé on a turntable and buttons for colour and tuning" width="1280" height="720" loading="lazy"><figcaption>The dealer: 14 cars for sale, RGB paint and six upgrades (v0.20.4).</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.17-minimappa.jpg" alt="Race view with a minimap top left, speedometer bottom right and hexagonal touch buttons" width="1280" height="720" loading="lazy"><figcaption>In the race: minimap with the rivals' arrows, digital dashboard, hexagon touch controls.</figcaption></figure>
+</div>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Physics, measured</h2>
+  <div>
+
+<p>The car is a rigid body on four wheels simulated by hand, not Godot's ready-made vehicle node, so every behaviour can be tuned. Wheels are cylinders cast towards the ground, so they ride up a kerb instead of hitting it. Each wheel has its own spring and damper, and grip limited by the load on that wheel: brake hard and the weight moves forward, exactly as in a real car.</p>
+<p>Feel was never judged by eye alone. An automated test bench drives a reference car and prints the results as JSON, and runs at three different physics rates to prove that a slow phone and a fast PC drive the same.</p>
+<div class="table-scroll"><table class="numbers">
+<thead><tr><th>Physics ticks per second</th><th>0&ndash;100 km/h</th><th>Braking from 144 km/h</th><th>Top speed</th><th>Jump from a 25&deg; ramp</th></tr></thead>
+<tbody>
+<tr><td>30</td><td>3.53 s</td><td>62.9 m</td><td>226.0 km/h</td><td>45.4 m</td></tr>
+<tr><td>60</td><td>3.48 s</td><td>62.9 m</td><td>225.9 km/h</td><td>45.9 m</td></tr>
+<tr><td>120</td><td>3.47 s</td><td>62.9 m</td><td>226.2 km/h</td><td>45.5 m</td></tr>
+</tbody></table></div>
+<p>Jumps land within 2.0&ndash;2.5% of the theoretical ballistic path, a 15 cm kerb is cleared at 40 and 90 km/h, and an 8 m drop ends with the car upright in 0.2 seconds.</p>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Circuits anyone can write</h2>
+  <div>
+
+<p>I wanted more varied circuits, and I wanted to draw them myself without programming. So the game reads a tiny language in Italian that reads like satnav directions, one piece of road per line:</p>
+<pre class="code"><code><span class="c"># ROUTE 66 - map of the "Desert" circuit</span>
+<span class="k">PARTENZA</span>
+<span class="k">DRITTO</span> 520            <span class="c"># the long Route 66 straight</span>
+<span class="k">DESTRA</span> 60 220         <span class="c"># very fast sweeper</span>
+<span class="k">SALITA</span> 4
+<span class="k">ESSE SINISTRA</span> 45 70   <span class="c"># into the canyon</span>
+<span class="k">TORNANTE DESTRA</span> 24    <span class="c"># hairpin at the bottom of the canyon</span></code></pre>
+<p>The game closes the loop by itself, adjusting curves and straights so the finish meets the start, then builds the road, the terrain, the racing line and the speed the AI should carry through each corner. Checkpoint times come from the same racing line: each section allows its ideal time &times; 1.55 + 4 seconds.</p>
+<figure class="wide-figure"><img src="assets/img/nitro/mappe-circuiti.png" alt="Four circuit outlines coloured by altitude from yellow to red" width="1630" height="400" loading="lazy"><figcaption>Mountain (2.8 km), Coast (2.0 km), Night City (2.2 km) and Desert (1.7 km), drawn from their text maps. Colour shows altitude.</figcaption></figure>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Built for a mid-range phone</h2>
+  <div>
+
+<p>Version 0.13 froze my phone, a Samsung A51. Instead of cutting features I treated it as an engineering problem:</p>
+<ul class="facts">
+<li>Switched the phone build from Vulkan to OpenGL ES, which ran smoothly where Vulkan stuttered.</li>
+<li>Merged each car's 3D parts to cut draw calls: one sports car went from 8,270 draw calls to 148.</li>
+<li>Compressed textures with mipmaps: memory in a race went from 418 MB to 104 MB.</li>
+<li>Pre-baked lighter car models with a build tool, and drew distant cars as simpler versions.</li>
+<li>Dropped the comic-book shader style I had built in v0.9&ndash;v0.12 and went back to realistic graphics, because it cost too much on the phone.</li>
+</ul>
+<figure class="wide-figure"><img src="assets/img/nitro/v0.17-caricamento.jpg" alt="Four frames of a loading screen where a garage shutter opens as the percentage grows" width="1280" height="720" loading="lazy"><figcaption>The loading screen is a garage shutter that opens as the race loads, my idea instead of a progress bar (v0.17).</figcaption></figure>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>Licences, tracked one by one</h2>
+  <div>
+
+<p>Every third-party asset (cars, buildings, trees, textures, sounds) is free and registered with author, link, licence and the changes we made: more than 120 entries. In version 0.15 I removed every car whose licence did not allow commercial use, renamed the rest with invented names and removed the real brands' logos, so the game could one day be sold.</p>
+<div class="callout"><p>The repository follows the same discipline: model libraries the game does not use are kept out of it, and the register records where every removed pack came from.</p></div>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>How it changed</h2>
+  <div>
+
+<figure class="wide-figure"><img src="assets/img/nitro/evoluzione.jpg" alt="A sequence of screenshots from the first low-poly city to the later versions" width="1278" height="480" loading="lazy"><figcaption>From the low-poly night city of day one, through the comic-book style, back to realistic graphics.</figcaption></figure>
+<div class="table-scroll"><table class="numbers">
+<tbody>
+<tr><th>v0.1</th><td>First playable prototype on the phone: night city seen from above</td></tr>
+<tr><th>v0.2&ndash;v0.3</th><td>Rigid-body physics, camera behind the car, jumps</td></tr>
+<tr><th>v0.4&ndash;v0.6</th><td>Mountain by day, garage, steering from the wheels, dashboard</td></tr>
+<tr><th>v0.7&ndash;v0.9</th><td>Audio, traffic you can hit, hexagon controls, comic-book style</td></tr>
+<tr><th>v0.10&ndash;v0.12</th><td>Route 66 menu, circuits as text maps, desert, pause, fairer police</td></tr>
+<tr><th>v0.13&ndash;v0.16</th><td>The phone froze: lighter cars and textures, OpenGL, only commercially licensed cars</td></tr>
+<tr><th>v0.17&ndash;v0.18</th><td>Start in the garage, minimap, shutter loading screen, money and reputation</td></tr>
+<tr><th>v0.19&ndash;v0.20.4</th><td>Car dealer with paint, six upgrades and a 3D showroom floor</td></tr>
+<tr><th>v0.21</th><td>Fuller environments: 51 new models of woods, rocks, houses and street furniture</td></tr>
+</tbody></table></div>
+<p>The <a href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/STORIA.md">development diary</a> (in Italian) records, version by version, what I asked for and how it was built. The <a href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/TECNICO.md">technical document</a> covers architecture, AI rivals, audio and performance in depth.</p>
+
+  </div>
+</section></div><div class="wrap"><nav class="next" aria-label="Projects"><span></span><a href="project-xplore-parkour.html">Next: XPLORE Parkour</a></nav></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
+    </div>
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

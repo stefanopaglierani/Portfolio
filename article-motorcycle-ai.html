@@ -1,203 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge AI & Headless Architecture for Motorcycles | Stefano Paglierani</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --code-bg: #0b1120;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
-        }
-
-        /* NAVBAR */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            padding: 20px 40px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .menu a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: var(--accent);
-        }
-
-        /* ARTICLE HEADER */
-        .article-header {
-            max-width: 800px;
-            margin: 60px auto 40px auto;
-            padding: 0 20px;
-        }
-
-        .article-tag {
-            color: var(--accent);
-            font-family: monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .article-header h1 {
-            font-size: 42px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .article-meta {
-            color: var(--text-muted);
-            font-size: 14px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ARTICLE CONTENT */
-        .article-content {
-            max-width: 800px;
-            margin: 0 auto 80px auto;
-            padding: 0 20px;
-            color: #cbd5e1;
-        }
-
-        .article-content h2 {
-            color: var(--text-main);
-            font-size: 28px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-        }
-
-        .article-content h3 {
-            color: var(--accent);
-            font-size: 22px;
-            margin-top: 40px;
-            margin-bottom: 15px;
-        }
-
-        .article-content p {
-            margin-bottom: 20px;
-        }
-        
-        .article-content ul {
-            margin-bottom: 20px;
-            padding-left: 20px;
-        }
-        
-        .article-content li {
-            margin-bottom: 10px;
-        }
-
-        /* CODE BLOCK STYLING */
-        pre {
-            background-color: var(--code-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 30px 0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        code {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            color: #6ee7b7;
-        }
-        
-        .code-comment {
-            color: #64748b;
-            font-style: italic;
-        }
-
-        .code-keyword {
-            color: #c084fc;
-        }
-        
-        .code-function {
-            color: #fcd34d;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An offline-first voice assistant for motorcyclists | Stefano Paglierani</title>
+<meta name="description" content="A conceptual architecture for a headless, offline React Native voice assistant: on-device language models, foreground services, audio ducking and map matching.">
+<meta property="og:title" content="An offline-first voice assistant for motorcyclists | Stefano Paglierani">
+<meta property="og:description" content="A conceptual architecture for a headless, offline React Native voice assistant: on-device language models, foreground services, audio ducking and map matching.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#e6eaee">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Stefano Paglierani</a>
+    <nav class="site-nav" aria-label="Main"><a href="index.html#work">Work</a><a href="resume.html">Résumé</a><a href="articles.html" aria-current="page">Writing</a><a href="https://github.com/stefanopaglierani">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap"><article class="article">
+  <p class="crumbs"><a href="articles.html">Writing</a> / Mobile Architecture / Edge AI</p>
+  <h1 class="wide">Architecting a Headless, Offline-First AI Assistant for Motorcyclists</h1>
+  <p class="byline">Stefano Paglierani, 8 mins read</p>
+  <div class="callout"><p>This is a concept and an architecture study, not a shipped app.</p></div>
 
-    <header>
-        <nav>
-            <div class="logo">S.<span>Paglierani</span></div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="articles.html">Tech Blog</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="article-header">
-        <span class="article-tag">Mobile Architecture / Edge AI</span>
-        <h1>Architecting a Headless, Offline-First AI Assistant for Motorcyclists</h1>
-        <div class="article-meta">
-            <span>By Stefano Paglierani</span>
-            <span>•</span>
-            <span>Est. Read: 8 mins</span>
-            <span>•</span>
-            <span>Systems Architecture</span>
-        </div>
-    </div>
-
-    <div class="article-content">
         
         <p>Operating a motorcycle demands 100% visual and manual attention. Yet, modern navigation and communication tools rely heavily on screen interactions and constant cellular connectivity. When riding through remote mountain passes, cloud-dependent voice assistants inevitably fail.</p>
         
@@ -218,23 +49,23 @@
             <li><strong>Tier 2 (The Execution Engine):</strong> Only upon detecting the Wake Word does the system momentarily spin up the heavier SLM to process the subsequent command, immediately spinning it back down once the task is executed.</li>
         </ul>
 
-        <!-- CODE BLOCK CONCEPT -->
-        <pre><code><span class="code-comment">// Conceptual Architecture: Foreground Service Audio Management</span>
-<span class="code-keyword">import</span> { AppRegistry } <span class="code-keyword">from</span> <span class="code-keyword">'react-native'</span>;
-<span class="code-keyword">import</span> ForegroundService <span class="code-keyword">from</span> <span class="code-keyword">'@supersami/rn-foreground-service'</span>;
-<span class="code-keyword">import</span> { VoskEngine } <span class="code-keyword">from</span> <span class="code-keyword">'react-native-vosk'</span>;
+        
+        <pre class="code"><code><span class="c">// Conceptual Architecture: Foreground Service Audio Management</span>
+<span class="k">import</span> { AppRegistry } <span class="k">from</span> <span class="k">'react-native'</span>;
+<span class="k">import</span> ForegroundService <span class="k">from</span> <span class="k">'@supersami/rn-foreground-service'</span>;
+<span class="k">import</span> { VoskEngine } <span class="k">from</span> <span class="k">'react-native-vosk'</span>;
 
-<span class="code-function">const</span> <span class="code-keyword">initializeMicroListener</span> = () => {
-    ForegroundService.<span class="code-function">start</span>({
+<span class="k">const</span> <span class="k">initializeMicroListener</span> = () => {
+    ForegroundService.<span class="k">start</span>({
         id: 144,
-        title: <span class="code-keyword">'System Active'</span>,
-        message: <span class="code-keyword">'Awaiting Voice Commands...'</span>,
+        title: <span class="k">'System Active'</span>,
+        message: <span class="k">'Awaiting Voice Commands...'</span>,
     });
 
-    <span class="code-comment">// Low-power listening state</span>
-    VoskEngine.<span class="code-function">startListening</span>(audioStream, (text) => {
-        <span class="code-keyword">if</span> (text.includes(<span class="code-keyword">"wake_word"</span>)) {
-            <span class="code-function">triggerHeavyModel</span>(); <span class="code-comment">// Spin up the SLM</span>
+    <span class="c">// Low-power listening state</span>
+    VoskEngine.<span class="k">startListening</span>(audioStream, (text) => {
+        <span class="k">if</span> (text.includes(<span class="k">"wake_word"</span>)) {
+            <span class="k">triggerHeavyModel</span>(); <span class="c">// Spin up the SLM</span>
         }
     });
 };</code></pre>
@@ -254,11 +85,25 @@
         
         <p>By compartmentalizing complex logic into discrete building blocks (audio management, routing, LLM instantiation), I delegate raw code generation to AI agents under my strict architectural supervision. This methodology multiplies development velocity, prevents technical debt, and allows me to focus purely on solving the high-level structural challenges.</p>
 
+    
+</article></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2 class="wide">Let's talk</h2>
+      <p>Open to product, automation and software roles in Northern Colorado, or remote.</p>
+      <p>EU citizen based in Italy, seeking H-1B sponsorship; open to O-1 and other visa routes.</p>
     </div>
-
-    <footer>
-        <p>&copy; 2026 Stefano Paglierani. Designed for solving hard technical problems.</p>
-    </footer>
-
+    <div>
+      <h2 class="wide">Contact</h2>
+      <p><a href="mailto:stefano.paglierani83@gmail.com">stefano.paglierani83@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/stefano-paglierani-a4067a398/">LinkedIn</a></p>
+      <p><a href="https://github.com/stefanopaglierani">GitHub</a></p>
+    </div>
+    <p class="fine">&copy; 2026 Stefano Paglierani. Plain HTML and CSS, no framework &mdash; <a href="https://github.com/stefanopaglierani/Portfolio">source on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>
