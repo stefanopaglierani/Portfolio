@@ -295,7 +295,7 @@ pre.code code { background: none; padding: 0; font-size: inherit; }
   .work-item:nth-child(even) .work-media { order: 0; }
   .work-media .inset { display: none; }
   .process { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .case-body { grid-template-columns: 1fr; }
+  .case-body { grid-template-columns: minmax(0, 1fr); }
   .case-body > h2, .resume-side { position: static; }
 }
 @media (max-width: 640px) {

@@ -8,7 +8,7 @@ I trained as an industrial automation technician and today I build software as p
 
 | Project | What it is | Links |
 |---|---|---|
-| **Nitro Underground** | 3D street-racing game for Android in Godot 4: hand-written vehicle physics checked by a test bench, circuits written as text maps, 26 playable versions in 13 days | [Case study](project-nitro-underground.html) · [Source](https://github.com/stefanopaglierani/nitro-underground) |
+| **Nitro Underground** | 3D street-racing game for Android in Godot 4: hand-written vehicle physics checked by a test bench, circuits written as text maps, versions v0.1 to v0.26 in 16 days | [Case study](project-nitro-underground.html) · [Source](https://github.com/stefanopaglierani/nitro-underground) |
 | **XPLORE Parkour app** | Members app and website for a 400-member parkour school: bookings, instalment memberships, Italian tax receipts, community; one rules engine for server, browser and tests | [Case study](project-xplore-parkour.html) · [Source](https://github.com/stefanopaglierani/xplore-parkour-app) |
 | **Cozy Ambience** | Zero-cost pipeline on GitHub Actions that animates still images with depth-aware effects, layers ambient sound and uploads to YouTube on a schedule | [Case study](project-cozy-ambience.html) · [YouTube](https://www.youtube.com/@relaxing-video-b1k) · [Source](https://github.com/stefanopaglierani/cozy-ambience) |
 | **Universal Game Tools** | Game-agnostic tools for Godot; first module: a deterministic procedural island generator designed through decision records | [Case study](project-universal-game-tools.html) · [Source](https://github.com/stefanopaglierani/universal-game-tools) |

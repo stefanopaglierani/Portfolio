@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nitro Underground — case study | Stefano Paglierani</title>
-<meta name="description" content="A 3D street-racing game for Android built in Godot in 13 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, tuned for a mid-range phone.">
+<meta name="description" content="A 3D street-racing game for Android built in Godot in 16 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, a world streamed in tiles, tuned for a mid-range phone.">
 <meta property="og:title" content="Nitro Underground — case study | Stefano Paglierani">
-<meta property="og:description" content="A 3D street-racing game for Android built in Godot in 13 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, tuned for a mid-range phone.">
+<meta property="og:description" content="A 3D street-racing game for Android built in Godot in 16 days: hand-written vehicle physics measured by a test bench, circuits written as text maps, a world streamed in tiles, tuned for a mid-range phone.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/nitro/v0.21-costa.jpg">
 <meta name="theme-color" content="#e6eaee">
@@ -32,18 +32,18 @@
       <p class="lead">A 3D street-racing game for Android: overtaking through traffic, nitro, drifts, jumps, and police that show up when you cause too much damage. Name, world and circuits are original.</p>
       <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/nitro-underground">Source on GitHub</a><a class="btn" href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/STORIA.md">Development diary</a></div>
     </div>
-    <div class="plate"><dl><dt>Role</dt><dd>Concept, game design, product direction and every play-test</dd><dt>Built with</dt><dd>Godot 4.7, GDScript, Jolt physics; OpenGL ES on Android, Vulkan on PC</dd><dt>Timeline</dt><dd>27 October to 8 November 2026: 26 playable versions</dd><dt>Status</dt><dd>Playable prototype, v0.21</dd><dt>Code</dt><dd>About 7,500 lines of GDScript, written by Claude under my direction</dd></dl></div>
+    <div class="plate"><dl><dt>Role</dt><dd>Concept, game design, product direction and every play-test</dd><dt>Built with</dt><dd>Godot 4.7, GDScript, Jolt physics; OpenGL ES on Android, Vulkan on PC</dd><dt>Timeline</dt><dd>27 October to 11 November 2026: v0.1 to v0.26, each one play-tested</dd><dt>Status</dt><dd>Playable prototype, v0.26</dd><dt>Code</dt><dd>About 7,500 lines of GDScript, written by Claude under my direction</dd></dl></div>
   </div>
 </div><div class="wrap"><figure class="case-hero"><img src="assets/img/nitro/v0.21-costa.jpg" alt="Racing along a coastal road with palm trees, white houses and rocks" width="1280" height="720" loading="lazy"><figcaption>Version 0.21, the coast circuit: 51 new environment models placed along the road by code.</figcaption></figure></div><div class="wrap"><section class="case-body">
   <h2>Why it exists</h2>
   <div>
 
 <p class="lead">I wanted to find out how far one person can take a real game when the code is written by an AI and every product decision is made by a human who tests on his own phone.</p>
-<p>The answer, after 13 days: a racing game with a garage, a car dealer, tuning, money and reputation, four circuits, three AI rivals, traffic you can crash into and a police chase system. Each version went onto my Android phone or PC, I played it, wrote down what felt wrong, and that list became the brief for the next version.</p>
+<p>The answer, after 16 days: a racing game with a garage, a car dealer, tuning, money and reputation, four circuits, three AI rivals, traffic you can crash into and a police chase system. Each version went onto my Android phone or PC, I played it, wrote down what felt wrong, and that list became the brief for the next version.</p>
 <div class="gallery">
   <figure class=""><img src="assets/img/nitro/v0.18-start.jpg" alt="Title screen with two cars racing on a wet coastal road at sunset" width="1280" height="720" loading="lazy"><figcaption>The start screen (v0.18).</figcaption></figure>
   <figure class=""><img src="assets/img/nitro/v0.17-garage.jpg" alt="Garage: one black muscle car between two arrows, name and specs below" width="1280" height="720" loading="lazy"><figcaption>The garage: three cars to choose from, and the choice is final (v0.17).</figcaption></figure>
-  <figure class=""><img src="assets/img/nitro/v0.20.4-dealer.jpg" alt="Dealer showroom with a green coupé on a turntable and buttons for colour and tuning" width="1280" height="720" loading="lazy"><figcaption>The dealer: 14 cars for sale, RGB paint and six upgrades (v0.20.4).</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.22.2-dealer-icons.jpg" alt="Dealer showroom with a green coupé on a turntable, money and reputation counters, and glossy icons for garage, my cars, for sale, tuning and paint" width="1280" height="720" loading="lazy"><figcaption>The dealer: 14 cars for sale, paint and six upgrades, with icons cut from a racing icon sheet I supplied (v0.22.2).</figcaption></figure>
   <figure class=""><img src="assets/img/nitro/v0.17-minimappa.jpg" alt="Race view with a minimap top left, speedometer bottom right and hexagonal touch buttons" width="1280" height="720" loading="lazy"><figcaption>In the race: minimap with the rivals' arrows, digital dashboard, hexagon touch controls.</figcaption></figure>
 </div>
 
@@ -57,11 +57,11 @@
 <div class="table-scroll"><table class="numbers">
 <thead><tr><th>Physics ticks per second</th><th>0&ndash;100 km/h</th><th>Braking from 144 km/h</th><th>Top speed</th><th>Jump from a 25&deg; ramp</th></tr></thead>
 <tbody>
-<tr><td>30</td><td>3.53 s</td><td>62.9 m</td><td>226.0 km/h</td><td>45.4 m</td></tr>
-<tr><td>60</td><td>3.48 s</td><td>62.9 m</td><td>225.9 km/h</td><td>45.9 m</td></tr>
-<tr><td>120</td><td>3.47 s</td><td>62.9 m</td><td>226.2 km/h</td><td>45.5 m</td></tr>
+<tr><td>30</td><td>3.60 s</td><td>33.4 m</td><td>212.7 km/h</td><td>33.9 m</td></tr>
+<tr><td>60</td><td>3.55 s</td><td>33.4 m</td><td>212.6 km/h</td><td>33.5 m</td></tr>
+<tr><td>120</td><td>3.52 s</td><td>33.3 m</td><td>212.8 km/h</td><td>33.8 m</td></tr>
 </tbody></table></div>
-<p>Jumps land within 2.0&ndash;2.5% of the theoretical ballistic path, a 15 cm kerb is cleared at 40 and 90 km/h, and an 8 m drop ends with the car upright in 0.2 seconds.</p>
+<p>Results from version 0.22. Until then jumps landed within 2.0&ndash;2.5% of the theoretical ballistic path, but play-testing told a different story: the brake barely worked in corners, the handbrake spun the car, and cars flew for metres after a crash. So I asked for heavier cars (1,800 kg instead of 1,200, with engine, brakes and springs scaled to match), an arcade brake assist and extra gravity while climbing. The bench confirmed it: braking from 144 km/h went from 62.9 m to 33.4 m, a handbrake drift now peaks at 38&deg; instead of spinning out at 84&deg;, and jumps are about 25% shorter, on purpose.</p>
 
   </div>
 </section></div><div class="wrap"><section class="case-body">
@@ -91,8 +91,23 @@
 <li>Compressed textures with mipmaps: memory in a race went from 418 MB to 104 MB.</li>
 <li>Pre-baked lighter car models with a build tool, and drew distant cars as simpler versions.</li>
 <li>Dropped the comic-book shader style I had built in v0.9&ndash;v0.12 and went back to realistic graphics, because it cost too much on the phone.</li>
+<li>Gave the phone its own graphics profile in v0.22: 3D drawn at 62% resolution, no glow, one shadow map, half the scenery and 12 traffic cars instead of 24. In the same camera shots, triangles fell by 25&ndash;39% and draw calls by 21&ndash;32%.</li>
 </ul>
 <figure class="wide-figure"><img src="assets/img/nitro/v0.17-caricamento.jpg" alt="Four frames of a loading screen where a garage shutter opens as the percentage grows" width="1280" height="720" loading="lazy"><figcaption>The loading screen is a garage shutter that opens as the race loads, my idea instead of a progress bar (v0.17).</figcaption></figure>
+
+  </div>
+</section></div><div class="wrap"><section class="case-body">
+  <h2>One world, streamed in tiles</h2>
+  <div>
+
+<p>The long-term plan is a single large world with four zones instead of four separate circuits. The world is built outside the game, by the terrain and road generators of <a href="project-universal-game-tools.html">Universal Game Tools</a>, and saved as ready-made files: the game opens them without containing any of the tools' code. Version 0.23 was the first race on such a world, a small island with a road, two villages and trees.</p>
+<p>Then I asked for an island at least five times larger, and before filling it with content I wanted to know whether the phone could cope. The terrain is cut into 80 tiles of 320 m, each with a detailed version, a light one for the distance and its collision; the game loads them in the background around the camera, 25 on the phone and 49 on the PC. On my Galaxy A51 I measured 37&ndash;42 FPS, with 200&ndash;230 thousand triangles against 910 thousand on the small island.</p>
+<div class="gallery three">
+  <figure class=""><img src="assets/img/nitro/v0.24-island-x5.jpg" alt="A black muscle car drifting on a wide grey road across bare green hills, with the debug counters for FPS, triangles and tiles at the top" width="1280" height="720" loading="lazy"><figcaption>v0.24: the bare five-times island, with the performance counters on screen.</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.25-island-x5.jpg" alt="The car at 203 km/h on cracked asphalt between grassy hills dotted with trees" width="1280" height="720" loading="lazy"><figcaption>v0.25: grass, rock, sand, asphalt and about 6,100 trees, rocks and props.</figcaption></figure>
+  <figure class=""><img src="assets/img/nitro/v0.26-costa-x5.jpg" alt="The car racing two rivals along a coastal road with the sea on both sides and a minimap of the loop" width="1280" height="720" loading="lazy"><figcaption>v0.26: the Coast circuit rebuilt as a closed loop on the island.</figcaption></figure>
+</div>
+<p>Version 0.25 dressed the island with the same terrain shader as the hand-made circuits, the sea from the coast circuit and up to six lighter versions of every model, which the engine swaps by distance. Version 0.26 is the first complete zone: the Coast circuit, read from its own text map, placed on the west shore as a closed loop and joined to the rest of the road network. The phone test of these last two versions is still to come.</p>
 
   </div>
 </section></div><div class="wrap"><section class="case-body">
@@ -119,6 +134,9 @@
 <tr><th>v0.17&ndash;v0.18</th><td>Start in the garage, minimap, shutter loading screen, money and reputation</td></tr>
 <tr><th>v0.19&ndash;v0.20.4</th><td>Car dealer with paint, six upgrades and a 3D showroom floor</td></tr>
 <tr><th>v0.21</th><td>Fuller environments: 51 new models of woods, rocks, houses and street furniture</td></tr>
+<tr><th>v0.22&ndash;v0.22.2</th><td>A graphics profile for the phone, heavier cars, real brakes, a stronger nitro, new icons for garage and dealer</td></tr>
+<tr><th>v0.23&ndash;v0.24</th><td>First race on a generated world, then an island five times larger, loaded in tiles while you drive</td></tr>
+<tr><th>v0.25&ndash;v0.26</th><td>The large island gets textures, sea, villages and trees; the Coast circuit becomes its first zone</td></tr>
 </tbody></table></div>
 <p>The <a href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/STORIA.md">development diary</a> (in Italian) records, version by version, what I asked for and how it was built. The <a href="https://github.com/stefanopaglierani/nitro-underground/blob/prova-pc/docs/TECNICO.md">technical document</a> covers architecture, AI rivals, audio and performance in depth.</p>
 

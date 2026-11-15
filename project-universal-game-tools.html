@@ -32,7 +32,7 @@
       <p class="lead">A personal library of reusable, documented tools for Godot, designed so each one can be dropped into any game. The first module, UPTG, generates procedural islands: an irregular coastline, hills, a mountain region, a mesh and matching collision.</p>
       <div class="actions"><a class="btn solid" href="https://github.com/stefanopaglierani/universal-game-tools">Source on GitHub</a><a class="btn" href="https://github.com/stefanopaglierani/universal-game-tools/tree/main/Documentation/architecture/decisions">Design decisions</a></div>
     </div>
-    <div class="plate"><dl><dt>Role</dt><dd>Architect and reviewer: specification, the six design decisions, acceptance criteria, testing on my own laptop</dd><dt>Built with</dt><dd>Godot 4.7.2, GDScript, headless test runner; Godot Physics and Jolt</dd><dt>Timeline</dt><dd>6 November 2026: from empty repository to release 0.1.0 in one day</dd><dt>Status</dt><dd>UPTG 0.1.0 released; road and world generators planned</dd><dt>Code</dt><dd>About 1,600 lines of addon and test code</dd></dl></div>
+    <div class="plate"><dl><dt>Role</dt><dd>Architect and reviewer: specification, the six design decisions, acceptance criteria, testing on my own laptop</dd><dt>Built with</dt><dd>Godot 4.7.2, GDScript, headless test runner; Godot Physics and Jolt</dd><dt>Timeline</dt><dd>6 November 2026: from empty repository to release 0.1.0 in one day</dd><dt>Status</dt><dd>Terrain generator UPTG 0.1.0 (6 November) and road generator UPRG 0.1.0 (11 November) released; world editor in progress</dd><dt>Code</dt><dd>About 1,600 lines of addon and test code</dd></dl></div>
   </div>
 </div><div class="wrap"><figure class="case-hero"><img src="assets/img/ugt/demo.jpg" alt="UPTG demo window: an island in a blue sea with a panel listing seed, grid size, triangle count, generation times and a heights checksum" width="1600" height="900" loading="lazy"><figcaption>The demo scene, rendered for this page from the repository. The panel shows the real figures: 131,072 triangles, height field in 35 ms, collision in 4 ms, and a checksum of the heights.</figcaption></figure></div><div class="wrap"><section class="case-body">
   <h2>Architecture before code</h2>
@@ -92,7 +92,8 @@
   <h2>What comes next</h2>
   <div>
 
-<p>The repository is laid out for three modules: the terrain generator, a procedural road generator and a world generator that combines them. The rule I set is that the next module starts only after the first one is tested and approved. All documentation is written in English and Italian.</p>
+<p>The repository is laid out for three modules: the terrain generator, a procedural road generator and a world generator that combines them. The rule I set is that the next module starts only after the first one is tested and approved.</p>
+<p>The road generator followed one week later. Between 8 and 11 November it learned to lay roads on a baked terrain, join them at junctions, add villages with their own streets, place 3D models with lighter versions for the distance, cut very large worlds into tiles and close a road into a ring. Its first customer is my racing game: <a href="project-nitro-underground.html">Nitro Underground</a> v0.23&ndash;v0.26 races on worlds made this way. Release 0.1.0 came on 11 November, together with a standalone world editor with sculpting brushes, lakes and rivers, and a small addon that lets any Godot game read the finished world.</p>
 
   </div>
 </section></div><div class="wrap"><nav class="next" aria-label="Projects"><a href="project-cozy-ambience.html">Previous: Cozy Ambience</a><a href="project-edge-sentinel.html">Next: Edge Sentinel</a></nav></div>
